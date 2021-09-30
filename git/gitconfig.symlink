@@ -1,0 +1,19 @@
+[include]
+	path = ~/.gitconfig.local
+
+
+[core]
+	excludesfile = ~/.gitignore
+	editor = vim
+[user]
+	name = 
+	email = 
+[rerere]
+	enabled = true
+[commit]
+	template = /Users/pat/.stCommitMsg
+
+[alias]
+        ignore = !git update-index --assume-unchanged 
+        unignore = !git update-index --no-assume-unchanged
+        ignored = !git ls-files -v | grep ^[a-z]
