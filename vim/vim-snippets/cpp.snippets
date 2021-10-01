@@ -1,0 +1,33 @@
+extends c
+
+snippet emain "int main()"
+int main()
+{
+	$0
+	return 0;
+}
+endsnippet
+
+snippet cl "class .. (class)"
+class ${1:name} {
+public:
+	${0:variables}
+private:
+};
+endsnippet
+
+snippet cls "class .. (class)"
+class ${1:name} {
+public:
+	$1() {}
+	~$1() {}
+	${0:code}
+private:
+};
+endsnippet
+
+snippet ns "namespace .. (namespace)"
+namespace${1/.+/ /m}${1:`!p snip.rv = snip.basename or "name"`} {
+${VISUAL}$0
+} // $1
+endsnippet

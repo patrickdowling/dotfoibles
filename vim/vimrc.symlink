@@ -1,0 +1,75 @@
+set nocompatible
+set noerrorbells
+
+" Source other files directly from .dotfiles directory
+let g:dotvim = $HOME . '/.dotfiles/vim/'
+execute 'source ' . g:dotvim . 'plugins.vim'
+
+syntax on
+set selectmode=mouse
+set mousef
+set nu
+set hidden
+
+set autoread                          " Auto reload changed files
+set wildmenu                          " Tab autocomplete in command mode
+set backspace=indent,eol,start        " http://vi.stackexchange.com/a/2163
+
+filetype plugin indent on
+
+set wrap " turn on line wrapping
+set wrapmargin=8 " wrap lines when coming within n characters from side
+set linebreak " set soft wrapping
+set showbreak=… " show ellipsis at breaking
+
+" toggle invisible characters
+set list
+set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+set showbreak=↪
+
+let g:airline_powerline_fonts=1
+
+let mapleader = ","
+
+execute 'source ' . g:dotvim . 'mappings.vim'
+for s:plug_settings in glob(g:dotvim . 'plug_*.vim', 1, 1)
+	execute 'source ' . s:plug_settings
+endfor
+
+" Search 
+" Use regular regexes
+nnoremap / /\v
+vnoremap / /\v
+set ignorecase smartcase
+set incsearch
+set showmatch
+set hlsearch
+nnoremap <leader><space> :noh<cr>
+vnoremap <tab> %
+
+
+set background=dark
+"set background=light
+let g:gruvbox_contrast_light="hard"
+let g:gruvbox_italic=1
+let g:gruvbox_invert_signs=0
+let g:gruvbox_improved_strings=0
+let g:gruvbox_improved_warnings=1
+let g:gruvbox_undercurl=1
+let g:gruvbox_contrast_dark="hard"
+colorscheme gruvbox
+
+let g:indent_guides_guide_size = 1
+let g:vim_indent_guides_start_level = 2
+
+autocmd FileType make setlocal noexpandtab
+autocmd FileType c,cpp setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+
+let g:NERDSpaceDelims=1
+let g:NERDDefaultAlign='left'
+let g:NERDCommentEmptyLines=1
+
+if filereadable($HOME . "/.vimrc.local")
+	source ~/.vimrc.local
+endif
