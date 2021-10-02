@@ -1,33 +1,39 @@
 #!/usr/bin/env bash
 set -e
-#set -x
+# set -x
 
-ROOT=$(pwd -P)
-cd "$ROOT"
+DOT_ROOT="$(pwd -P)"
+cd "$DOT_ROOT"
 
 . ./common.sh
 
 install_symlinks() {
-	info "Symlinking symlinks..."
-	for symlink in $(find "$ROOT" -maxdepth 2 -name "*.symlink") ; do
-		local DIR=" $(basename $(dirname $symlink))"
+	log "Symlinking symlinks..."
+	
+	readarray -t symlinks < <(find "$DOT_ROOT" -maxdepth 2 -name "*.symlink" -type f)
+	for symlink in ${symlinks[*]}; do
+		local DIR
+		DIR=" $(basename "$(dirname "$symlink")")"
 		dot_install_symlink "$symlink" "$HOME/.$(basename "${symlink%.*}")"
 	done
 }
 
 install() {
-	info "Running installers..."
-	for installer in $(find "$ROOT" -mindepth 2 -maxdepth 2 -name "install.sh") ; do
-		local DIR=" $(basename $(dirname $installer))"
-		info "Installing..."
-		( cd "$(dirname $installer)" && . install.sh )
+	log "Running installers..."
+
+	readarray -t installers < <(find "$DOT_ROOT" -mindepth 2 -maxdepth 2 -name "install.sh")
+	for installer in ${installers[*]}; do
+		local DIR
+		DIR=" $(basename "$(dirname "$installer")")"
+		log "Installing..."
+		( cd "$(dirname "$installer")" && . install.sh )
 	done
 }
 
-info "Install dotfiles from $ROOT"
-dot_detect_os
+log "Install dotfiles from $DOT_ROOT"
 
-info "Detected OS: $DOTFILES_OS"
+dot_detect_os
+log "Detected OS: $DOT_OS"
 
 install_symlinks
 install

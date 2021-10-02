@@ -4,7 +4,7 @@
 GITCONFIG_LOCAL="$HOME/.gitconfig.local"
 
 if [ -e "$GITCONFIG_LOCAL" ] ; then
-	info ".gitconfig.local already exists"
+	verbose ".gitconfig.local already exists"
 	exit
 fi
 

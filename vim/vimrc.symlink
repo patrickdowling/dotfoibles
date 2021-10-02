@@ -13,8 +13,7 @@ set hidden
 
 set autoread                          " Auto reload changed files
 set wildmenu                          " Tab autocomplete in command mode
-set backspace=indent,eol,start        " http://vi.stackexchange.com/a/2163
-
+set backspace=indent,eol,start        " http://vi.stackexchange.com/a/2163 
 filetype plugin indent on
 
 set wrap " turn on line wrapping
@@ -27,6 +26,10 @@ set list
 set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 set showbreak=↪
 
+if (has('termguicolors'))
+	set termguicolors
+endif
+
 let g:airline_powerline_fonts=1
 
 let mapleader = ","
@@ -35,6 +38,7 @@ execute 'source ' . g:dotvim . 'mappings.vim'
 for s:plug_settings in glob(g:dotvim . 'plug_*.vim', 1, 1)
 	execute 'source ' . s:plug_settings
 endfor
+execute 'source ' . g:dotvim . 'theme.vim'
 
 " Search 
 " Use regular regexes
@@ -47,17 +51,6 @@ set hlsearch
 nnoremap <leader><space> :noh<cr>
 vnoremap <tab> %
 
-
-set background=dark
-"set background=light
-let g:gruvbox_contrast_light="hard"
-let g:gruvbox_italic=1
-let g:gruvbox_invert_signs=0
-let g:gruvbox_improved_strings=0
-let g:gruvbox_improved_warnings=1
-let g:gruvbox_undercurl=1
-let g:gruvbox_contrast_dark="hard"
-colorscheme gruvbox
 
 let g:indent_guides_guide_size = 1
 let g:vim_indent_guides_start_level = 2

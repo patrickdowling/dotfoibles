@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-info() { echo "$(printf "\r  [ \033[00;34m..\033[0m ]")$DIR $*"; }
+verbose() { echo "$(printf "\r  [ \033[00;34m..\033[0m ]")$DIR $*"; }
+
+log() { echo "$(printf "\r  [ \033[00;34m**\033[0m ]")$DIR $*"; }
 
 user() { echo "$(printf "\r  [ \033[0;33m??\033[0m ]")$DIR $*"; }
 
@@ -10,8 +12,8 @@ fail() { echo "$(printf "\r\033[2K  [\033[0;31mFAIL\033[0m]")$DIR $*"; exit 1; }
 
 dot_detect_os() {
 	case "$(uname -s)" in
-		Darwin*) DOTFILES_OS=mac ;;
-		Linux*) DOTFILES_OS=linux ;;
+		Darwin*) DOT_OS=mac ;;
+		Linux*) DOT_OS=linux ;;
 		*) fail "Unrecognized OS" ;;
 	esac
 }
@@ -28,7 +30,7 @@ dot_install_symlink() {
 	local skip=
 
 	if [ -e "$target" ] || [ -L "$target" ]; then
-		[ "$skip_all" = "true" ] && { info "$target exists, skipping..."; return; }
+		[ "$skip_all" = "true" ] && { verbose "$target exists, skipping..."; return; }
 		if [ "$overwrite_all" != "true" ]; then
 			user "Symlink '$target' exists: [s]kip, [S]kip all, [o]verwrite, [O]verwrite all"
 			local action=
@@ -52,7 +54,7 @@ dot_install_symlink() {
 
 dot_install_directory() {
 	if [ -d "$1" ] ; then
-		info "Directory '$1' exists"
+		verbose "Directory '$1' exists"
 	else
 		mkdir -p "$1"
 		success "Directory '$1' created"
