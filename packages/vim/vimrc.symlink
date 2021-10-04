@@ -2,7 +2,7 @@ set nocompatible
 set noerrorbells
 
 " Source other files directly from .dotfiles directory
-let g:dotvim = $HOME . '/.dotfiles/vim/'
+let g:dotvim = $HOME . '/.dotfiles/packages/vim/'
 execute 'source ' . g:dotvim . 'plugins.vim'
 
 syntax on

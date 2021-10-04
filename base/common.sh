@@ -2,7 +2,7 @@
 
 verbose() { echo "$(printf "\r  [ \033[00;34m..\033[0m ]")$DIR $*"; }
 
-log() { echo "$(printf "\r  [ \033[00;34m**\033[0m ]")$DIR $*"; }
+log() { echo "$(printf "\r  [ \033[00;32m**\033[0m ]")$DIR $*"; }
 
 user() { echo "$(printf "\r  [ \033[0;33m??\033[0m ]")$DIR $*"; }
 
@@ -34,7 +34,7 @@ dot_install_symlink() {
 		if [ "$overwrite_all" != "true" ]; then
 			user "Symlink '$target' exists: [s]kip, [S]kip all, [o]verwrite, [O]verwrite all"
 			local action=
-			read -n 1 action
+			read -r -n 1 action
 			case "$action" in
 				o) overwrite=true ;;
 				O) overwrite_all=true ;;
@@ -48,7 +48,7 @@ dot_install_symlink() {
 	if [ "$skip" = "true" ] || [ "$skip_all" = "true" ] ; then return ; fi
 	if [ "$overwrite" = "true" ] || [ "$overwrite_all" = "true" ] ; then FLAGS=f ; fi
 
-	ln -s$FLAGS $src $target
+	ln -s$FLAGS "$src" "$target"
 	success "Symlink $target -> $src created"
 }
 

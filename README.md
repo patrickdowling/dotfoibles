@@ -29,9 +29,18 @@ git clone git@github.com:patrickdowling/dotfiles.git .dotfiles
 cd .dotfiles && ./install.sh
 ```
 
+## TODO Things
+- .clang-format template
+- makefile templates
+- aliases
+- zsh?
+
 ## TODO Prerequisistes
 - curl
 - Ag
+- neovim
+- clang-format
+- fonts
 
 ### Linux
 ```
