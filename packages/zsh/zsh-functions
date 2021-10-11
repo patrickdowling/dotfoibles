@@ -1,0 +1,4 @@
+function ls_on_chwd () {
+	command ls;
+}
+

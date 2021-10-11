@@ -26,6 +26,10 @@ set list
 set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 set showbreak=↪
 
+" Numbers
+:set number
+:set cursorline
+
 if (has('termguicolors'))
 	set termguicolors
 endif
@@ -50,7 +54,6 @@ set showmatch
 set hlsearch
 nnoremap <leader><space> :noh<cr>
 vnoremap <tab> %
-
 
 let g:indent_guides_guide_size = 1
 let g:vim_indent_guides_start_level = 2

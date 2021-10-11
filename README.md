@@ -41,6 +41,7 @@ cd .dotfiles && ./install.sh
 - neovim
 - clang-format
 - fonts
+- https://github.com/romkatv/powerlevel10k
 
 ### Linux
 ```

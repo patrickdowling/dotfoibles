@@ -9,7 +9,8 @@ endif
 call plug#begin('~/.vim/plugged')
 "Plug 'itchyny/lightline.vim'
 Plug 'vim-airline/vim-airline'
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
+" Plug 'morhetz/gruvbox'
 " Plug 'will133/vim-dirdiff'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -23,5 +24,6 @@ Plug 'rhysd/vim-clang-format'
 Plug 'SirVer/ultisnips'
 Plug 'edkolev/tmuxline.vim'
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " :PlugInstall
 call plug#end()
