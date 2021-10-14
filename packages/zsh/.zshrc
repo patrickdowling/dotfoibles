@@ -1,29 +1,11 @@
-###
-## GENERAL OPTIONS
-#
-setopt auto_cd
-setopt extendedglob nomatch menucomplete
-setopt interactive_comments
-stty stop undef # Disable ctrl-s
-unsetopt BEEP
-
-###
-# HISTORY
-#
-HISTFILE="$ZSH_CACHE_DIR/zsh_history"
-export HISTSIZE=50000        # History lines stored in mememory.
-export SAVEHIST=50000        # History lines stored on disk.
-setopt inc_append_history    # Immediately append commands to history file.
-setopt hist_ignore_all_dups  # Never add duplicate entries.
-setopt hist_ignore_space     # Ignore commands that start with a space.
-setopt hist_reduce_blanks    # Remove unnecessary blank lines.
-setopt share_history
+source "$ZDOTDIR/zsh-functions"
+source "$ZDOTDIR/zsh-settings"
 
 ###
 ## TODO PLUGINS
 #
-source "$ZDOTDIR/zsh-functions"
-source $ZSH_CACHE_DIR/powerlevel10k/powerlevel10k.zsh-theme
+zsh_plugins_add "romkatv/powerlevel10k" "powerlevel10k.zsh-theme"
+zsh_plugins_add "zsh-users/zsh-syntax-highlighting" # supposedly must be sourced last?
 
 ###
 ## EXPORTS
@@ -36,12 +18,13 @@ export LC_ALL=en_US.UTF-8
 ###
 ## COMPLETION
 #
-autoload -Uz compinit && compinit 
+autoload -Uz compinit && compinit -d "$ZSH_CACHE_DIR/.zcompcache"
 
 unsetopt menu_complete
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$ZSH_CACHE_DIR/.zcompcache"
+
 zstyle ':completion:*' menu select
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "${ZSH_CACHE_DIR:-${HOME}}/.zcompcache"
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
@@ -66,34 +49,8 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
+# vi in shell is still too weird
+bindkey -e
 
 # ls on change of current working directory
 (( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
@@ -117,17 +74,14 @@ do
 	source "$file"
 done
 
-
+###
+## PATHS & THINGS
+#
 export PATH="/Users/pat/Library/Python/2.7/bin:/usr/local/opt/avr-gcc@9/bin:$PATH"
-
 source $HOME/.cargo/env
 export PATH="/usr/local/anaconda3/bin:$PATH"
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
-# Must be sourced last
-source $ZSH_CACHE_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh
-
+zsh_file_source "$ZDOTDIR/.p10k.zsh"
+zsh_file_source ~/.fzf.zsh

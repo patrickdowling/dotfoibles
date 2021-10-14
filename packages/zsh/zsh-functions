@@ -1,3 +1,35 @@
+function zsh_file_source() {
+	[ -f "$1" ] && source "$1"
+}
+
+typeset -U ZSH_PLUGINS
+ZSH_PLUGINS=()
+
+# Add plugin from git repo
+function zsh_plugins_add() {
+	local plugin_name=$(echo $1 | cut -d "/" -f 2)
+	local plugin_dir="$ZSH_PLUGIN_DIR/$plugin_name"
+	ZSH_PLUGINS+="$plugin_name"
+
+	[ -d "$plugin_dir" ] || git clone "https://github.com/$1.git" "$plugin_dir"
+	case $2 in
+		false) return ;; # don't source anything
+		"") source "$plugin_dir/$plugin_name.plugin.zsh" || source "$plugin_dir/$plugin_name.zsh" ;;
+		*) source "$plugin_dir/$2" ;;
+	esac
+}
+
+function zsh_plugins_list() {
+	echo "${ZSH_PLUGINS}"
+}
+
+function zsh_plugins_update() {
+	for plugin in ${ZSH_PLUGINS}; do
+		echo "Updating $plugin"
+		git -C "$ZSH_PLUGIN_DIR/$plugin" pull
+	done
+}
+
 function ls_on_chwd () {
 	command ls;
 }

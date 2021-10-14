@@ -42,6 +42,7 @@ cd .dotfiles && ./install.sh
 - clang-format
 - fonts
 - https://github.com/romkatv/powerlevel10k
+- zoxide
 
 ### Linux
 ```

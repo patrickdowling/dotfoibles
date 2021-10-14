@@ -19,7 +19,7 @@ dot_symlinks() {
 	done
 }
 
-dot_install() {
+dot_installers() {
 	log "Running installers..."
 
 	readarray -t installers < <(find "$DOT_PACKAGES" -mindepth 2 -maxdepth 2 -name "install.sh")
@@ -32,12 +32,27 @@ dot_install() {
 	done
 }
 
-log "Install dotfiles from $DOT_ROOT"
+dot_install_prerequisites() {
+	log "Installing prerequisites"
+}
 
-dot_detect_os
-log "Detected OS: $DOT_OS"
+dot_install() {
+	log "Install dotfiles from $DOT_ROOT"
 
-dot_symlinks
-dot_install
+	dot_detect_os
+	log "Detected OS: $DOT_OS"
 
-success "All done"
+	dot_symlinks
+	dot_installers
+
+	success "All done"
+}
+
+case "$1" in
+	"--prerequisites") dot_install_prerequisites ;;
+	"--install") dot_install ;;
+	*)
+		echo "No action specified, doing nothing"
+		exit 0
+		;;
+esac
