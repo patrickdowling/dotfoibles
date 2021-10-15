@@ -1,11 +1,14 @@
 source "$ZDOTDIR/zsh-functions"
 source "$ZDOTDIR/zsh-settings"
 
+export ZOS=$(detect_os)
+
 ###
-## TODO PLUGINS
+## PLUGINS
 #
 zsh_plugins_add "romkatv/powerlevel10k" "powerlevel10k.zsh-theme"
-zsh_plugins_add "zsh-users/zsh-syntax-highlighting" # supposedly must be sourced last?
+zsh_plugins_add "zsh-users/zsh-syntax-highlighting" # Hm, supposedly must be sourced last?
+zsh_plugins_add "hlissner/zsh-autopair"
 
 ###
 ## EXPORTS
@@ -44,13 +47,6 @@ zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directori
 zstyle ':completion:*' squeeze-slashes true
 
 zmodload zsh/complist
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
-
-# vi in shell is still too weird
-bindkey -e
 
 # ls on change of current working directory
 (( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
@@ -73,6 +69,8 @@ for file in ${zsh_config_files}
 do
 	source "$file"
 done
+
+source "$ZDOTDIR/zsh-bindings"
 
 ###
 ## PATHS & THINGS
