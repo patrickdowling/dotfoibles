@@ -76,7 +76,7 @@ source "$ZDOTDIR/zsh-bindings"
 ## PATHS & THINGS
 #
 export PATH="/Users/pat/Library/Python/2.7/bin:/usr/local/opt/avr-gcc@9/bin:$PATH"
-source $HOME/.cargo/env
+zsh_file_source $HOME/.cargo/env
 export PATH="/usr/local/anaconda3/bin:$PATH"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
