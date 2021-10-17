@@ -1,14 +1,26 @@
-source "$ZDOTDIR/zsh-functions"
-source "$ZDOTDIR/zsh-settings"
+###
+## PREREQUISITES
+#
+# Do things here that require user input
+stty stop undef # Disable ctrl-s
 
+# P10K INSTANT PROMPT
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+source "$ZDOTDIR/zsh-functions"
 export ZOS=$(detect_os)
 
 ###
 ## PLUGINS
 #
+zsh_file_source "$ZDOTDIR/.p10k.zsh"
 zsh_plugins_add "romkatv/powerlevel10k" "powerlevel10k.zsh-theme"
 zsh_plugins_add "zsh-users/zsh-syntax-highlighting" # Hm, supposedly must be sourced last?
 zsh_plugins_add "hlissner/zsh-autopair"
+
+source "$ZDOTDIR/zsh-settings"
 
 ###
 ## EXPORTS
@@ -45,6 +57,7 @@ zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-d
 zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
 zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'expand'
 zstyle ':completion:*' squeeze-slashes true
+zstyle ':completion:*' insert-tab pending
 
 zmodload zsh/complist
 
@@ -74,12 +87,12 @@ source "$ZDOTDIR/zsh-bindings"
 
 ###
 ## PATHS & THINGS
-#
+
+export PATH="$HOME/.dotfiles/bin:$PATH"
 export PATH="/Users/pat/Library/Python/2.7/bin:/usr/local/opt/avr-gcc@9/bin:$PATH"
 zsh_file_source $HOME/.cargo/env
 export PATH="/usr/local/anaconda3/bin:$PATH"
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
-zsh_file_source "$ZDOTDIR/.p10k.zsh"
 zsh_file_source ~/.fzf.zsh
