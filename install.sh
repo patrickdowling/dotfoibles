@@ -36,7 +36,17 @@ dot_install_prerequisites() {
 	log "Installing prerequisites"
 }
 
+dot_check_prerequisites() {
+	local zsh_path
+	local zsh_version
+	zsh_path=$(which zsh) || fail "ZSH not found"
+	zsh_version=$(zsh --version) || fail "ZSH version not found"
+	success "ZSH: $zsh_path, version: $zsh_version"
+}
+
 dot_install() {
+	dot_check_prerequisites
+
 	log "Install dotfiles from $DOT_ROOT"
 
 	dot_detect_os

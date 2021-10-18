@@ -54,3 +54,5 @@ sudo apt install fonts-powerline
 brew
 ```
 - Ensure correct zsh version is used (i.e. the brew version in `/usr/local/bin/zsh`)
+- `sudo sh -c "echo $(which zsh) >> /etc/shells"`
+

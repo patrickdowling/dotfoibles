@@ -4,6 +4,12 @@
 # Do things here that require user input
 stty stop undef # Disable ctrl-s
 
+export EDITOR=nvim
+export GIT_EDITOR=${EDITOR}
+export VISUAL=${EDITOR}
+export LC_ALL=en_US.UTF-8
+
+
 # P10K INSTANT PROMPT
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -17,49 +23,12 @@ export ZOS=$(detect_os)
 #
 zsh_file_source "$ZDOTDIR/.p10k.zsh"
 zsh_plugins_add "romkatv/powerlevel10k" "powerlevel10k.zsh-theme"
-zsh_plugins_add "zsh-users/zsh-syntax-highlighting" # Hm, supposedly must be sourced last?
+zsh_plugins_add "zsh-users/zsh-completions"
+AUTOPAIR_INHIBIT_INIT=1
 zsh_plugins_add "hlissner/zsh-autopair"
 
-source "$ZDOTDIR/zsh-settings"
-
-###
-## EXPORTS
-#
-export EDITOR=nvim
-export GIT_EDITOR=${EDITOR}
-export VISUAL=${EDITOR}
-export LC_ALL=en_US.UTF-8
-
-###
-## COMPLETION
-#
-autoload -Uz compinit && compinit -d "$ZSH_CACHE_DIR/.zcompcache"
-
-unsetopt menu_complete
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$ZSH_CACHE_DIR/.zcompcache"
-
-zstyle ':completion:*' menu select
-zstyle ':completion:*:matches' group 'yes'
-zstyle ':completion:*:options' description 'yes'
-zstyle ':completion:*:options' auto-description '%d'
-zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
-zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
-zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
-zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
-zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' verbose yes
-
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
-zstyle ':completion:*:*:cd:*:directory-stack' menu yes select
-zstyle ':completion:*:-tilde-:*' group-order 'named-directories' 'path-directories' 'expand'
-zstyle ':completion:*' squeeze-slashes true
-zstyle ':completion:*' insert-tab pending
-
-zmodload zsh/complist
+zsh_file_source "$ZDOTDIR/zsh-settings"
+zsh_file_source "$ZDOTDIR/zsh-completion"
 
 # ls on change of current working directory
 (( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
@@ -87,7 +56,7 @@ source "$ZDOTDIR/zsh-bindings"
 
 ###
 ## PATHS & THINGS
-
+#
 export PATH="$HOME/.dotfiles/bin:$PATH"
 export PATH="/Users/pat/Library/Python/2.7/bin:/usr/local/opt/avr-gcc@9/bin:$PATH"
 zsh_file_source $HOME/.cargo/env
@@ -96,3 +65,6 @@ export PATH="/usr/local/anaconda3/bin:$PATH"
 export PATH="$PATH:$HOME/.rvm/bin"
 
 zsh_file_source ~/.fzf.zsh
+
+autopair-init
+zsh_plugins_add "zsh-users/zsh-syntax-highlighting" # "must be sourced last"
