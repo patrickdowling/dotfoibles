@@ -12,7 +12,7 @@ fail() { echo "$(printf "\r\033[2K  [\033[0;31mFAIL\033[0m]")$DIR $*"; exit 1; }
 
 dot_detect_os() {
 	case "$(uname -s)" in
-		Darwin*) DOT_OS=mac ;;
+		Darwin*) DOT_OS=macos ;;
 		Linux*) DOT_OS=linux ;;
 		*) fail "Unrecognized OS" ;;
 	esac

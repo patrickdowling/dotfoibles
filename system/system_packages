@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -e
+
+# This isn't expected to be run standalone, but can be if necessary
+[ -n "$DOT_OS" ] || fail "DOT_OS not defined"
+
+required_binaries=("zsh" "git" "nvim" "fzf")
+
+brew_packages=(coreutils fzf git neovim zsh the_silver_searcher clang-format)
+apt_packages=()
+
+install_brew() {
+	log "Installing brew..."
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+}
+
+dot_system_packages() {
+	if [ "macos" = "$DOT_OS" ] ; then
+		[ -x "$(which brew)" ] || install_brew
+		log "Update brew" && brew update
+		log "Installing ${brew_packages[*]}" && brew install ${brew_packages[*]}
+	else
+		apt-get update
+	fi
+}
+

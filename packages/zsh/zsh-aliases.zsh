@@ -8,7 +8,7 @@ alias zrc="${EDITOR} ${ZDOTDIR}/.zshrc"
 
 alias dotfiles="cd $DOT_ROOT"
 
-if [ "$ZOS" = "mac" ]; then
+if [ "$ZOS" = "macos" ]; then
     alias ls="ls -G"
     alias grep="grep -G"
     alias fgrep="fgrep -G"

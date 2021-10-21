@@ -15,7 +15,7 @@ user "git user.email?"
 read -e git_user_email
 
 git_credential_helper=cache
-if [ "$DOTFILES_OS" = "mac" ] ; then
+if [ "$DOTFILES_OS" = "macos" ] ; then
 	git_credential_helper='osxkeychain'
 fi
 

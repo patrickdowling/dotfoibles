@@ -33,15 +33,14 @@ cd .dotfiles && ./install.sh
 - .clang-format template
 - makefile templates
 - aliases
-- zsh?
 
 ## TODO Prerequisistes
 - curl
 - Ag
+- brew `the_silver_searcher`
 - neovim
 - clang-format
 - fonts
-- https://github.com/romkatv/powerlevel10k
 - zoxide
 
 ### Linux

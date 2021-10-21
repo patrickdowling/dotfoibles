@@ -1,6 +1,6 @@
 function detect_os() {
 	case "$(uname -s)" in
-		Darwin*) echo "mac" ;;
+		Darwin*) echo "macos" ;;
 		Linux*) echo "linux" ;;
 		*) ;;
 	esac
@@ -39,7 +39,7 @@ function zsh_plugins_update() {
 }
 
 function ls_on_chwd () {
-if [ "$ZOS" = "mac" ]; then
+if [ "$ZOS" = "macos" ]; then
 	ls -G
 else
 	ls --color=auto

@@ -3,3 +3,5 @@ export ZSH_CACHE_DIR=$HOME/.cache/zsh
 export ZSH_PLUGIN_DIR=$HOME/.cache/zsh/plugins
 
 export DOT_ROOT=$HOME/.dotfiles
+
+[ -f "$HOME/.zshenv.local" ] && source "$HOME/.zshenv.local"
