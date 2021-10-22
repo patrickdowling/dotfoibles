@@ -24,5 +24,10 @@ alias ll="ls -alFh"
 alias la="ls -A"
 alias l="ls -CF"
 
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+
 alias d='dirs -v'
-for index ({1..9}) alias "$index"="cd +${index}"; unset index
+for index ({1..9}) alias "$index"="cd -${index}"; unset index

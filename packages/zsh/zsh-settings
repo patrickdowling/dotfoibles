@@ -1,7 +1,6 @@
 ###
 ## GENERAL OPTIONS
-#
-setopt auto_cd
+# setopt auto_cd
 setopt extendedglob nomatch
 setopt interactive_comments
 # stty stop undef # Disable ctrl-s -> done before instant-prompt
@@ -25,3 +24,4 @@ setopt share_history
 setopt auto_pushd
 setopt pushd_ignore_dups
 setopt pushd_silent
+setopt pushdminus

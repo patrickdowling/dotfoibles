@@ -1,4 +1,6 @@
-function detect_os() {
+fpath+="$ZDOTDIR/functions"
+
+function zsh_detect_os() {
 	case "$(uname -s)" in
 		Darwin*) echo "macos" ;;
 		Linux*) echo "linux" ;;
@@ -12,6 +14,9 @@ function zsh_file_source() {
 
 typeset -U ZSH_PLUGINS
 ZSH_PLUGINS=()
+
+autoload -Uz zsh_plugins_list
+autoload -Uz zsh_plugins_update
 
 # Add plugin from git repo
 function zsh_plugins_add() {
@@ -27,22 +32,7 @@ function zsh_plugins_add() {
 	esac
 }
 
-function zsh_plugins_list() {
-	echo "${ZSH_PLUGINS}"
-}
-
-function zsh_plugins_update() {
-	for plugin in ${ZSH_PLUGINS}; do
-		echo "Updating $plugin"
-		git -C "$ZSH_PLUGIN_DIR/$plugin" pull
-	done
-}
-
-function ls_on_chwd () {
-if [ "$ZOS" = "macos" ]; then
-	ls -G
-else
-	ls --color=auto
-fi
-}
-
+# ls on change of current working directory
+autoload -Uz ls_on_chwd
+(( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
+add-zsh-hook chpwd ls_on_chwd

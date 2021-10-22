@@ -4,4 +4,9 @@ export ZSH_PLUGIN_DIR=$HOME/.cache/zsh/plugins
 
 export DOT_ROOT=$HOME/.dotfiles
 
+export EDITOR=nvim
+export GIT_EDITOR=${EDITOR}
+export VISUAL=${EDITOR}
+export LC_ALL=en_US.UTF-8
+
 [ -f "$HOME/.zshenv.local" ] && source "$HOME/.zshenv.local"

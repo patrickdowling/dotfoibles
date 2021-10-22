@@ -4,19 +4,13 @@
 # Do things here that require user input
 stty stop undef # Disable ctrl-s
 
-export EDITOR=nvim
-export GIT_EDITOR=${EDITOR}
-export VISUAL=${EDITOR}
-export LC_ALL=en_US.UTF-8
-
-
 # P10K INSTANT PROMPT
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 source "$ZDOTDIR/zsh-functions"
-export ZOS=$(detect_os)
+export ZOS=$(zsh_detect_os)
 
 ###
 ## PLUGINS
@@ -29,18 +23,7 @@ zsh_plugins_add "hlissner/zsh-autopair"
 
 zsh_file_source "$ZDOTDIR/zsh-settings"
 zsh_file_source "$ZDOTDIR/zsh-completion"
-
-# ls on change of current working directory
-(( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
-add-zsh-hook chpwd ls_on_chwd
-
-# Edit and rerun
-function edit_and_run() {
-	BUFFER="fc"
-	zle accept-line
-}
-zle -N edit_and_run
-bindkey "^v" edit_and_run
+zsh_file_source "$ZDOTDIR/zsh-paths"
 
 ###
 ## SOURCE DOFILE PACKAGE ZSH THINGS
@@ -51,19 +34,12 @@ for file in ${zsh_config_files}
 do
 	source "$file"
 done
-
-source "$ZDOTDIR/zsh-bindings"
+unset zsh_config_files
 
 ###
-## PATHS & THINGS
+## BINDINGS & MISC
 #
-export PATH="$HOME/.dotfiles/bin:$PATH"
-export PATH="/Users/pat/Library/Python/2.7/bin:/usr/local/opt/avr-gcc@9/bin:$PATH"
-zsh_file_source $HOME/.cargo/env
-export PATH="/usr/local/anaconda3/bin:$PATH"
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
+zsh_file_source "$ZDOTDIR/zsh-bindings"
 zsh_file_source ~/.fzf.zsh
 
 autopair-init

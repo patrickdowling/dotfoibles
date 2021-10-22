@@ -1,0 +1,3 @@
+function zsh_plugins_list() {
+	echo "${ZSH_PLUGINS}"
+}
