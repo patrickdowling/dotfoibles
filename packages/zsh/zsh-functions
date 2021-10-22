@@ -36,3 +36,5 @@ function zsh_plugins_add() {
 autoload -Uz ls_on_chwd
 (( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
 add-zsh-hook chpwd ls_on_chwd
+
+autoload mkcd
