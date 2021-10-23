@@ -1,14 +1,36 @@
 #!/usr/bin/env bash
 
-verbose() { echo "$(printf "\r  [ \033[00;34m..\033[0m ]")$DIR $*"; }
+COLOR_RED="\033[0;31m"
+COLOR_GREEN="\033[0;32m"
+COLOR_BLUE="\033[0;34m"
+COLOR_YELLOW="\033[0;33m"
+COLOR_RESET="\033[0m"
+ESC_CLEAR_LINE="\033[2K"
 
-log() { echo "$(printf "\r  [ \033[00;32m**\033[0m ]")$DIR $*"; }
+title() {
+	echo -e "\r [${COLOR_BLUE}####${COLOR_RESET}] $*"
+}
 
-user() { echo "$(printf "\r  [ \033[0;33m??\033[0m ]")$DIR $*"; }
+log() {
+	echo -e "\r [${COLOR_BLUE} ** ${COLOR_RESET}]$DIR $*"
+}
 
-success() { echo "$(printf "\r\033[2K  [ \033[00;32mOK\033[0m ]")$DIR $*"; }
+user() {
+	echo -e "\r [${COLOR_YELLOW}????${COLOR_RESET}]$DIR $*"
+}
 
-fail() { echo "$(printf "\r\033[2K  [\033[0;31mFAIL\033[0m]")$DIR $*"; exit 1; }
+success() {
+	echo -e "\r${ESC_CLEAR_LINE} [${COLOR_GREEN} OK ${COLOR_RESET}]$DIR $*"
+}
+
+fail() {
+	echo -e "\r${ESC_CLEAR_LINE} [${COLOR_RED}FAIL${COLOR_RESET}]$DIR $*"
+	exit 1
+}
+
+verbose() {
+	echo -e "\r [${COLOR_BLUE} ** ${COLOR_RESET}]$DIR $*"
+}
 
 dot_detect_os() {
 	case "$(uname -s)" in

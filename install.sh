@@ -2,6 +2,23 @@
 set -e
 # set -x
 
+###
+## Before we get started, does anyone want to get out?
+#
+dot_help() {
+cat << EOF
+Valid actions are
+--check : check prerequisites
+--install : install things
+--system_defaults : system default settings
+--system_packages : install system packages
+EOF
+}
+(( $# )) || { dot_help; exit 1; }
+
+###
+## Setup framework
+#
 . ./base/common.sh
 dot_detect_os
 log "Detected OS: $DOT_OS"
@@ -12,7 +29,7 @@ cd "$DOT_ROOT"
 DOT_PACKAGES="$DOT_ROOT/packages"
 
 dot_symlinks() {
-	log "Symlinking symlinks..."
+	title "Symlinking symlinks..."
 	
 	readarray -t symlinks < <(find "$DOT_PACKAGES" -maxdepth 2 -name "*.symlink" -type f)
 	for symlink in ${symlinks[*]}; do
@@ -23,7 +40,7 @@ dot_symlinks() {
 }
 
 dot_installers() {
-	log "Running installers..."
+	title "Running installers..."
 
 	readarray -t installers < <(find "$DOT_PACKAGES" -mindepth 2 -maxdepth 2 -name "install.sh")
 	for installer in ${installers[*]}; do
@@ -36,6 +53,7 @@ dot_installers() {
 }
 
 dot_check() {
+	title "Checking required binaries..."
 	for bin in ${required_binaries[*]} ; do
 		local path
 		path="$(which "$bin")" || fail "$exe not installed?"
@@ -50,15 +68,29 @@ dot_install() {
 	dot_installers
 }
 
+dot_system_defaults() {
+	title "Setting system defaults..."
 
-case "$1" in
-	"--check") dot_check ;;
-	"--install") dot_install ;;
-	"--system_packages") dot_system_packages ;;
-	*)
-		echo "No action specified, doing nothing"
-		exit 0
-		;;
-esac
+	local system_defaults_sh="./system/$DOT_OS-defaults.sh"
+	if [ -x "$system_defaults_sh" ] ; then
+		. "$system_defaults_sh"
+		success "Executed $system_defaults_sh"
+	fi
+}
+
+###
+## "MAIN"
+#
+while (( $# ))
+do
+	case "$1" in
+		"--check") dot_check ;;
+		"--install") dot_install ;;
+		"--system_defaults") dot_system_defaults ;;
+		"--system_packages") dot_system_packages ;;
+		*) fail "Unknown action '$1'" ;;
+	esac
+	shift
+done
 
 success "All done"
