@@ -30,7 +30,8 @@ zsh_file_source "$ZDOTDIR/zsh-paths"
 #
 typeset -U zsh_config_files
 zsh_config_files=($DOT_ROOT/packages/**/*.zsh)
-for file in ${zsh_config_files}
+# Except "function" subfolders otherwise we're shooting our autoload in the foot
+for file in ${zsh_config_files:#*/functions/*}
 do
 	source "$file"
 done

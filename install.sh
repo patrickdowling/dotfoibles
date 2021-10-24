@@ -56,7 +56,7 @@ dot_check() {
 	title "Checking required binaries..."
 	for bin in ${required_binaries[*]} ; do
 		local path
-		path="$(which "$bin")" || fail "$exe not installed?"
+		path="$(which "$bin")" || fail "$bin not installed?"
 		success "Found $bin at $path"
 	done
 }

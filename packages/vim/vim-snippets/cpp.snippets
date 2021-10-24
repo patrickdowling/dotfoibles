@@ -1,28 +1,24 @@
 extends c
 
-snippet emain "int main()"
-int main()
-{
-	$0
-	return 0;
-}
+snippet guard "header guard"
+#ifndef ${1:`!p snip.rv = snip.basename.upper() or "name"`}_H_
+#define $1_H_
+
+${0:${VISUAL}}
+
+#endif /* $1_H_ */
 endsnippet
 
-snippet cl "class .. (class)"
-class ${1:name} {
-public:
-	${0:variables}
-private:
-};
+snippet stdh "c++ header"
+#include <${1:${VISUAL}}>$0
 endsnippet
 
 snippet cls "class .. (class)"
-class ${1:name} {
+class ${1:${VISUAL}} {
 public:
-	$1() {}
-	~$1() {}
-	${0:code}
+	${2:public}
 private:
+	${3:private}
 };
 endsnippet
 

@@ -1,0 +1,25 @@
+
+function compile() {
+	[ -f "$1" ] || { echo "'$1' not a filename"; return 1; }
+
+	local out=${1%.*}
+	local compiler
+	local flags
+	case $1 in
+		*.cc|*.cpp)
+			compiler=g++
+			flags="$CXXFLAGS"
+			;;
+		*.c)
+			compiler=gcc
+			flags="$CCFLAGS"
+			;;
+	esac
+	if [ -n "$compiler" ] ; then
+		echo "$compiler -o $out $*"
+		$compiler $flags -o "$out" $*
+	else
+		echo "No compiler found for '$1"
+		return 1
+	fi
+}

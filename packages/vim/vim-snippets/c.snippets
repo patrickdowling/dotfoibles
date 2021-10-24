@@ -1,4 +1,36 @@
-snippet inc
-#include <${1:stdio}.h>
+snippet cguard "header guard"
+#ifndef ${1:`!p snip.rv = snip.basename.upper() or "name"`}_H_
+#define $1_H_
+
+${0:${VISUAL}}
+
+#endif /* $1_H_ */
 endsnippet
 
+snippet sinc "system header include"
+#include <${1:${VISUAL}}.h>$0
+endsnippet
+
+snippet inc "header include"
+#include "${1:${VISUAL}}.h"$0
+endsnippet
+
+snippet struct "struct"
+struct ${1:${VISUAL}} {
+	$0
+};
+endsnippet
+
+snippet main
+int main(int argc, const char *argv[]) {
+	$0
+	return 0;
+}
+endsnippet
+
+snippet emain "int main()"
+int main() {
+	$0
+	return 0;
+}
+endsnippet
