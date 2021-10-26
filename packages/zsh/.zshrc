@@ -11,6 +11,7 @@ fi
 
 source "$ZDOTDIR/zsh-functions"
 export ZOS=$(zsh_detect_os)
+zsh_file_source "$ZDOTDIR/zsh-$ZOS"
 
 ###
 ## PLUGINS
@@ -31,8 +32,7 @@ zsh_file_source "$ZDOTDIR/zsh-paths"
 typeset -U zsh_config_files
 zsh_config_files=($DOT_ROOT/packages/**/*.zsh)
 # Except "function" subfolders otherwise we're shooting our autoload in the foot
-for file in ${zsh_config_files:#*/functions/*}
-do
+for file in ${zsh_config_files:#*/functions/*}; do
 	source "$file"
 done
 unset zsh_config_files

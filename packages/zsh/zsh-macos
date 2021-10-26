@@ -1,0 +1,1 @@
+zsh_fpath_add "$(brew --prefix)/share/zsh/site-functions"

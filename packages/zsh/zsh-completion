@@ -9,7 +9,7 @@ setopt menu_complete
 autoload -Uz compinit && compinit -d "$ZSH_CACHE_DIR/.zcompcache/.zcompdump"
 
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$ZSH_CACHE_DIR/.zcompcache"
+# zstyle ':completion:*' cache-path "$ZSH_CACHE_DIR/.zcompcache/.zcompdump"
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*:matches' group 'yes'

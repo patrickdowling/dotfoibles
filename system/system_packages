@@ -6,7 +6,7 @@ set -e
 
 required_binaries=("zsh" "git" "nvim" "fzf")
 
-brew_packages=(coreutils fzf git neovim zsh the_silver_searcher clang-format)
+brew_packages=(coreutils fzf git neovim zsh the_silver_searcher clang-format zoxide)
 apt_packages=()
 
 install_brew() {

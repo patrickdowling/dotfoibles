@@ -12,6 +12,18 @@ function zsh_file_source() {
 	[ -f "$1" ] && source "$1"
 }
 
+function zsh_path_add() {
+	[ ! -d "$1" ] || path=($path $1)
+}
+
+function zsh_path_head() {
+	[ ! -d "$1" ] || path=($1 $path)
+}
+
+function zsh_fpath_add() {
+	[ ! -d "$1" ] || fpath=($fpath $1)
+}
+
 typeset -U ZSH_PLUGINS
 ZSH_PLUGINS=()
 

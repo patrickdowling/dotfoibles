@@ -34,3 +34,5 @@ for index ({1..9}) alias "$index"="cd -${index}"; unset index
 
 alias md='mkdir -p'
 alias rd='rmdir'
+
+alias paths='echo $PATH | tr ":" "\n"'
