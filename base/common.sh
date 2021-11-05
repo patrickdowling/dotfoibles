@@ -16,7 +16,7 @@ log() {
 }
 
 user() {
-	echo -e "\r [${COLOR_YELLOW}????${COLOR_RESET}]$DIR $*"
+	echo -e "\r [${COLOR_YELLOW} ?? ${COLOR_RESET}]$DIR $*"
 }
 
 success() {

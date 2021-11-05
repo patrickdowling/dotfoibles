@@ -4,7 +4,7 @@ set -e
 # This isn't expected to be run standalone, but can be if necessary
 [ -n "$DOT_OS" ] || fail "DOT_OS not defined"
 
-required_binaries=("zsh" "git" "nvim" "fzf")
+required_binaries=("zsh" "git" "nvim" "fzf" "zoxide")
 
 brew_packages=(coreutils fzf git neovim zsh the_silver_searcher clang-format zoxide)
 apt_packages=()

@@ -59,11 +59,21 @@ dot_check() {
 		path="$(which "$bin")" || fail "$bin not installed?"
 		success "Found $bin at $path"
 	done
+
+	title "Checking package requirements..."
+	readarray -t checkers < <(find "$DOT_PACKAGES" -mindepth 2 -maxdepth 2 -name "check.sh")
+	for checker in ${checkers[*]}; do
+		local DIR
+		DIR=" $(basename "$(dirname "$checker")")"
+		log "Checking prerequisites"
+		(cd "$(dirname "$checker")" && . check.sh )
+		success
+	done
 }
 
 dot_install() {
 	dot_check
-	log "Installing dotfiles from $DOT_ROOT"
+	title "Installing dotfiles from $DOT_ROOT"
 	dot_symlinks
 	dot_installers
 }
