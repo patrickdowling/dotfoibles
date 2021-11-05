@@ -1,0 +1,8 @@
+function dot_themes_update() {
+	echo "$DOT_THEMES"
+	local dirs=($DOT_THEMES/*)
+	for dir in ${dirs} ; do
+		echo "$dir..."
+		git -C "$dir" pull
+	done
+}

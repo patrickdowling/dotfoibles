@@ -3,6 +3,7 @@ export ZSH_CACHE_DIR=$HOME/.cache/zsh
 export ZSH_PLUGIN_DIR=$HOME/.cache/zsh/plugins
 
 export DOT_ROOT=$HOME/.dotfiles
+export DOT_THEMES=$HOME/.local/share/themes
 
 export EDITOR=nvim
 export GIT_EDITOR=${EDITOR}

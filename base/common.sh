@@ -82,3 +82,15 @@ dot_install_directory() {
 		success "Directory '$1' created"
 	fi
 }
+
+dot_git_clone() {
+	[ -d "$2" ] || fail "Invalid directory '$2'"
+	local name=$(echo $1 | cut -d "/" -f 2)
+	local path="$2/$name"
+	log "$name -> $path"
+	if [ -d "$path" ]; then
+		git -C "$path" pull
+	else
+		git clone --depth 1 "https://github.com/$1.git" "$path"
+	fi
+}
