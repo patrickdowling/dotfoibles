@@ -3,13 +3,15 @@ So it's recently become increasingly apparent that
 - I've been avoiding (shell) scripting for far too long...
 - My various dotfiles are, to put it nicely, a mess of copypasta and fickle preferences...
 - It doesn't help that they are distributed across various systems, with a mix of OSes, work and leisure.
-- Sharing them (via symlinks into dropbox et al.) hasn't worked out as well as it might have.
+- Sharing them (via symlinks into dropbox et al.) hasn't worked out as well as it might have and something always
+  seems to get lost.
 
 So it seems a good way to solve ALL THE THINGS! is some kind of (semi-) automatic dotfile installer thing. Of which there are, admittedly, already many.
 
 "How hard can it be?"
 
 I don't really expect anyone else to use this directly. Perhaps it's interesting or at least good for a laugh.
+Definitely assume it will be in flux.
 
 ## Guidelines
 - The "topic" approach seen in other dotfile collections seems useful, so most things live in the `packages` dir.

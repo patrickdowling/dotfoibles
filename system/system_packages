@@ -6,7 +6,9 @@ set -e
 
 required_binaries=("zsh" "git" "nvim" "fzf" "zoxide")
 
-brew_packages=(coreutils fzf git neovim zsh the_silver_searcher clang-format zoxide)
+brew_packages_core=(coreutils fzf git neovim zoxide zsh)
+brew_packages_extra=(clang-format direnv the_silver_searcher)
+
 apt_packages=()
 
 install_brew() {
@@ -18,7 +20,8 @@ dot_system_packages() {
 	if [ "macos" = "$DOT_OS" ] ; then
 		[ -x "$(which brew)" ] || install_brew
 		log "Update brew" && brew update
-		log "Installing ${brew_packages[*]}" && brew install ${brew_packages[*]}
+		log "Installing ${brew_packages_core[*]}" && brew install ${brew_packages_core[*]}
+		log "Installing ${brew_packages_extra[*]}" && brew install ${brew_packages_extra[*]}
 	else
 		apt-get update
 	fi
