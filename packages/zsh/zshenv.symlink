@@ -1,6 +1,8 @@
 export ZDOTDIR=$HOME/.config/zsh
 export ZSH_CACHE_DIR=$HOME/.cache/zsh
 export ZSH_PLUGIN_DIR=$HOME/.cache/zsh/plugins
+export ZCOMPDIR=$ZSH_CACHE_DIR/.zcompcache
+export ZCOMPFILE=$ZSH_CACHE_DIR/.zcompdump
 
 export DOT_ROOT=$HOME/.dotfiles
 export DOT_THEMES=$HOME/.local/share/themes
