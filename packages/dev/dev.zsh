@@ -1,2 +1,1 @@
-fpath+="$DOT_ROOT/packages/dev/functions"
-autoload -Uz compile
+zsh_autoload_functions "${0:a:h}/functions"

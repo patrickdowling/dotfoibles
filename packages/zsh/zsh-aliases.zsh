@@ -36,3 +36,4 @@ alias md='mkdir -p'
 alias rd='rmdir'
 
 alias paths='echo $PATH | tr ":" "\n"'
+alias fpaths='echo $FPATH | tr ":" "\n"'

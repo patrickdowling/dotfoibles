@@ -1,4 +1,12 @@
-fpath+="$ZDOTDIR/functions"
+function zsh_autoload_functions() {
+	if [ -d "$1" ] ; then
+		fpath+=$1
+		local funs=($1/*)
+		for fun in ${funs}; do
+			autoload -Uz ${fun:t}
+		done
+	fi
+}
 
 function zsh_detect_os() {
 	case "$(uname -s)" in
@@ -24,11 +32,10 @@ function zsh_fpath_add() {
 	[ ! -d "$1" ] || fpath=($fpath $1)
 }
 
+zsh_autoload_functions "$ZDOTDIR/functions"
+
 typeset -U ZSH_PLUGINS
 ZSH_PLUGINS=()
-
-autoload -Uz zsh_plugins_list
-autoload -Uz zsh_plugins_update
 
 # Add plugin from git repo
 function zsh_plugins_add() {
@@ -45,8 +52,5 @@ function zsh_plugins_add() {
 }
 
 # ls on change of current working directory
-autoload -Uz ls_on_chwd
 (( $+functions[add-zsh-hook] )) || autoload -Uz add-zsh-hook
 add-zsh-hook chpwd ls_on_chwd
-
-autoload -Uz mdcd
