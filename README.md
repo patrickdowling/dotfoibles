@@ -38,12 +38,13 @@ cd .dotfiles && ./install.sh --install.sh
 - aliases
 - `shellcheck`
 - generate local config files automatically similarly to `.gitconfig.local`
-- direnv
 
 ## TODO Prerequisistes
 - There's the beginnings of a prerequisistes check (`install.sh --check`)
 
-## TODO Install binaries/packages/missing bits
+## TODO
+- Install binaries/packages/missing bits
 - `brew` is brew is already somewhat supported; there aren't as many as expected.
 - Fonts & things
 - python, pip etc. (neovim)
+- Completions (e.g. docker)

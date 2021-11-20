@@ -6,13 +6,14 @@ zmodload zsh/complist
 
 setopt menu_complete
 
-[ -d "$ZCOMPDIR" ] || mkdir -p "$ZCOMPDIR"
-zsh_fpath_add "$ZCOMPDIR"
+[ -d "$ZSH_COMP_CACHE" ] || mkdir -p "$ZSH_COMP_CACHE"
+zsh_fpath_add "$ZSH_COMP_CACHE"
+zsh_fpath_add "$ZSH_COMP_COMPLETIONS"
 
-autoload -Uz compinit && compinit -d "$ZCOMPFILE"
+autoload -Uz compinit && compinit -d "$ZSH_COMP_FILE"
 
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$ZCOMPDIR"
+zstyle ':completion:*' cache-path "$ZSH_COMP_CACHE"
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*:matches' group 'yes'
@@ -36,6 +37,6 @@ zstyle ':completion:*' insert-tab pending
 
 
 function rebuild_zcompdump() {
-	rm -f "$ZCOMPFILE" && compinit -d "$ZCOMPFILE"
+	rm -f "$ZSH_COMP_FILE" && compinit -d "$ZSH_COMP_FILE"
 }
 
