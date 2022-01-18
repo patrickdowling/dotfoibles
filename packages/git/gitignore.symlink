@@ -5,3 +5,6 @@
 # Eagle files
 *.s#?
 *.b#?
+
+*.o
+*.d

@@ -48,3 +48,4 @@ cd .dotfiles && ./install.sh --install.sh
 - Fonts & things
 - python, pip etc. (neovim)
 - Completions (e.g. docker)
+- Convert init.vim to Lua
