@@ -9,34 +9,38 @@ required_binaries=("zsh" "git" "nvim" "fzf" "zoxide")
 mac_packages_core=(coreutils git)
 apt_packages_core=(build-essential curl file git procps)
 
-brew_packages_core=(fzf git neovim python zoxide zsh)
-brew_packages_extra=(clang-format direnv the_silver_searcher)
+brew_packages_core=(direnv fzf git neovim python the_silver_searcher zoxide zsh)
 
+# llvm on OS X conflicts with Apple version, but clang-format on linux conflicts with llvm
+brew_packages_extra_macos=(clang-format)
+brew_packages_extra_linux=(llvm)
 
 install_brew() {
 	if [ -x "$(command -v brew)" ] ; then
 		log "Installing brew..."
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	fi
-	log "Update brew" && brew update
+	log "Update brew" && brew update --quiet
 }
 
 install() {
 	log "Installing $*"
-	brew install $*
+	brew install --quiet $*
 }
 
 dot_system_packages() {
 	if [ "macos" = "$DOT_OS" ] ; then
 		install_brew
 		install ${mac_packages_core[*]}
+		extras=$brew_packages_extra_macos
 	else
 		log "Update apt" && sudo apt-get update
 		log "Installing ${apt_packages_core[*]}" && sudo apt-get install -y ${apt_packages_core[*]}
 		install_brew
+		extras=$brew_packages_extra_linux
 	fi
 
 	install ${brew_packages_core[*]}
-	install ${brew_packages_extra[*]}
+	install ${extras[*]}
 }
 
