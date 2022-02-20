@@ -44,8 +44,9 @@ cd .dotfiles && ./install.sh --install.sh
 
 ## TODO
 - Install binaries/packages/missing bits
-- `brew` is brew is already somewhat supported; there aren't as many as expected.
+- `brew` is already somewhat supported; there aren't as many packages as expected.
 - Fonts & things
 - python, pip etc. (neovim)
 - Completions (e.g. docker)
 - Convert init.vim to Lua
+- https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html

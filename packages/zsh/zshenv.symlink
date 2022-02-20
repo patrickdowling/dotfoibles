@@ -6,6 +6,8 @@ export ZSH_COMP_CACHE=$ZSH_CACHE_DIR/.zcompcache
 export ZSH_COMP_COMPLETIONS=$ZSH_CACHE_DIR/completions
 export ZSH_COMP_FILE=$ZSH_CACHE_DIR/.zcompdump
 
+export SHELL_SESSIONS_DISABLE=1
+
 export DOT_ROOT=$HOME/.dotfiles
 export DOT_THEMES=$HOME/.local/share/themes
 
