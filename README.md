@@ -50,3 +50,4 @@ cd .dotfiles && ./install.sh --install.sh
 - Completions (e.g. docker)
 - Convert init.vim to Lua
 - https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
+- Ansible?
