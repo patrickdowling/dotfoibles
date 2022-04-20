@@ -30,6 +30,10 @@ git clone git@github.com:patrickdowling/dotfoibles.git .dotfiles
 cd .dotfiles && ./install.sh --install.sh
 ```
 
+## TODO Ubuntu
+- don't forget to `chsh -s $(which zsh)` (also add to `/etc/shells`)
+- Set up `.zshenv.local` with `eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"`
+
 ## TODO General
 - zsh: Key bindings
 - .clang-format template

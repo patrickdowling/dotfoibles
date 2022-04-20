@@ -16,9 +16,11 @@ brew_packages_extra_macos=(clang-format)
 brew_packages_extra_linux=(llvm)
 
 install_brew() {
-	if [ -x "$(command -v brew)" ] ; then
+	log "Checking for brew..."
+	if [ -z "$(command -v brew)" ] ; then
 		log "Installing brew..."
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+		eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 	fi
 	log "Update brew" && brew update --quiet
 }
