@@ -30,28 +30,27 @@ git clone git@github.com:patrickdowling/dotfoibles.git .dotfiles
 cd .dotfiles && ./install.sh --install.sh
 ```
 
-## TODO Ubuntu
+## Vague To-Dos
+### Linux (Ubuntu)
 - don't forget to `chsh -s $(which zsh)` (also add to `/etc/shells`)
 - Set up `.zshenv.local` with `eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"`
 
-## TODO General
+### Features
 - zsh: Key bindings
 - .clang-format template
 - .editorconfig
 - makefile templates
 - aliases
 - `shellcheck`
-- generate local config files automatically similarly to `.gitconfig.local`
-
-## TODO Prerequisistes
-- There's the beginnings of a prerequisistes check (`install.sh --check`)
-
-## TODO
-- Install binaries/packages/missing bits
-- `brew` is already somewhat supported; there aren't as many packages as expected.
-- Fonts & things
-- python, pip etc. (neovim)
+- Generate local config files automatically similarly to `.gitconfig.local`
 - Completions (e.g. docker)
-- Convert init.vim to Lua
+- ~~Convert init.vim to Lua~~ (WIP)
+
+### General/Install
+- Convert most things to Ansible
+- ...at which point it might be useful to separate configs/dotfiles from provisioning/install
+- There's the beginnings of a prerequisistes check (`install.sh --check`) but that might not be necessary
+- Install binaries/packages/missing bits; `brew` is already somewhat supported; there aren't as many packages as expected.
+- Fonts & things?
+- python, pip etc.
 - https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
-- Ansible?
