@@ -25,7 +25,6 @@ set showbreak=… " show ellipsis at breaking
 set list
 set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 set showbreak=↪
-
 " Numbers
 :set number
 :set cursorline

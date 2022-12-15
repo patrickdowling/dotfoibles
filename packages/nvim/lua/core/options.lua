@@ -23,9 +23,16 @@ opt.list = true
 opt.wrap = true
 opt.wrapmargin = 8
 opt.linebreak = true
+opt.showbreak='…'
 
 -- Search
 opt.ignorecase = true -- case insensitive
 opt.smartcase = true -- case sensitive if expression contains capital letter
 opt.hlsearch = true -- highlight results
 opt.incsearch = true -- incremental search
+
+-- Tabs and indent
+opt.autoindent = true
+opt.expandtab = true
+opt.tabstop = 4
+opt.shiftwidth = 4

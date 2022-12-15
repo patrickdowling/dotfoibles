@@ -49,7 +49,7 @@ function check_file() {
 	[ ! -d "$filename" ] || return
 
 	case "$f" in
-		*.h | *.cpp)
+		*.h | *.cpp | *.cc)
 			;;
 		*)
 			IGNORED+=("$filename")

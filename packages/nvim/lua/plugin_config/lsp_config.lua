@@ -4,13 +4,15 @@ if not status then
 end
 
 mason.setup()
-
 require("mason-lspconfig").setup({
-	ensure_installed = { "sumneko_lua", "bashls", "clangd" }
+	ensure_installed = { "ansiblels", "bashls", "clangd", "sumneko_lua" }
 })
 
-
 local lspconfig = require("lspconfig")
+
+lspconfig.ansiblels.setup({})
+lspconfig.bashls.setup({})
+lspconfig.clangd.setup({})
 lspconfig.sumneko_lua.setup({
 	settings = {
 		Lua = {
@@ -21,5 +23,3 @@ lspconfig.sumneko_lua.setup({
 	}
 })
 
-lspconfig.bashls.setup({})
-lspconfig.clangd.setup({})

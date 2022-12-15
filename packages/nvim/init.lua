@@ -4,8 +4,9 @@ local dotfiles = vim.fn.expand("$HOME").."/.dotfiles"
 package.path = dotfiles.."/packages/nvim/lua/?.lua;"..package.path
 
 require('core.plugins')
-require('core.opt')
-require('core.keymap')
+require('core.options')
+require('core.autocmds')
+require('core.keymaps')
 require('core.colorscheme')
 require('plugin_config.lualine')
 require('plugin_config.nvim-tree')

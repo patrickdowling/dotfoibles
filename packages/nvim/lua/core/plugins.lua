@@ -32,5 +32,7 @@ Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
 
+Plug 'gpanders/editorconfig.nvim'
+
 if vim_plug_bootstrap then vim.cmd('PlugInstall') end
 vim.call('plug#end')

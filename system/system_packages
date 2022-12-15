@@ -6,6 +6,8 @@ set -e
 
 required_binaries=("zsh" "git" "nvim" "fzf" "zoxide")
 
+# TODO npm ripgrep
+
 mac_packages_core=(coreutils git)
 apt_packages_core=(build-essential curl file git procps)
 
