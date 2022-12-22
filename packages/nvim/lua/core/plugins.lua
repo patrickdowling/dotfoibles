@@ -1,38 +1,69 @@
 -- All the pretty plugins
--- Still using vim-plug, more neo would be packer
 
+-- Bootstrap packer, as per https://github.com/wbthomason/packer.nvim/blob/master/README.md
 local fn = vim.fn
-
-local ensure_vim_plug = function()
-	local install_path = fn.stdpath('data')..'/site/autoload/plug.vim'
-	if fn.empty(fn.glob(install_path)) > 0 then
-		vim.cmd("silent !sh -c 'curl -fLo "..install_path.." --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'")
-		return true
-	end
-	return false
+local ensure_packer = function()
+    local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+    if fn.empty(fn.glob(install_path)) > 0 then
+        fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+        vim.cmd [[packadd packer.nvim]]
+        return true
+    end
+    return false
 end
-local vim_plug_bootstrap = ensure_vim_plug()
+local packer_bootstrap = ensure_packer()
 
-local Plug = fn['plug#']
-vim.call('plug#begin')
-Plug 'tpope/vim-sensible'
-Plug 'nvim-lua/plenary.nvim'
+require('packer').startup(function(use)
+    use 'wbthomason/packer.nvim'
 
-Plug 'RRethy/nvim-base16'
+    use {
+        'neovim/nvim-lspconfig',
+        requires = {
+            'williamboman/mason.nvim',
+            'williamboman/mason-lspconfig.nvim',
+        }
+    }
 
-Plug 'nvim-tree/nvim-tree.lua'
-Plug 'nvim-tree/nvim-web-devicons'
-Plug('nvim-telescope/telescope.nvim', {tag = '0.1.0'})
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = function()
+            pcall(require('nvim-treesitter.install').update { with_sync = true })
+        end
+    }
 
-Plug 'nvim-lualine/lualine.nvim'
+    use 'tpope/vim-sensible'
+    use 'nvim-lualine/lualine.nvim'
+    use 'RRethy/nvim-base16'
 
-Plug 'nvim-treesitter/nvim-treesitter'
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons'
+        }
+    }
 
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'neovim/nvim-lspconfig'
+    use 'gpanders/editorconfig.nvim'
 
-Plug 'gpanders/editorconfig.nvim'
+    use {
+        'nvim-telescope/telescope.nvim',
+        branch = '0.1.x',
+        requires = {
+            'nvim-lua/plenary.nvim'
+        }
+    }
 
-if vim_plug_bootstrap then vim.cmd('PlugInstall') end
-vim.call('plug#end')
+    if packer_bootstrap then
+        require('packer').sync()
+    end
+end)
+
+-- If bootstrapping, we might also skip the rest of the config.
+-- We've used the pcall wrapper mostly though so it should be safe as is.
+
+-- TODO Does PackerCompile apply to our plugin_config/* files as well?
+local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePost', {
+    command = 'source <afile> | PackerCompile',
+    group = packer_group,
+    pattern = '*/nvim/lua/core/plugins.lua'
+})
