@@ -5,6 +5,7 @@ local opt = vim.opt
 opt.backspace = {"indent", "eol", "start"}
 opt.errorbells = false
 opt.visualbell = false
+opt.mouse = 'a'
 
 -- Line numbers
 opt.number = true -- ...line numbers
