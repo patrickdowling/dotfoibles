@@ -1,23 +1,28 @@
 -- General bindings
 vim.g.mapleader = ","
 
-local map = vim.keymap.set
+local keymap = vim.keymap.set
 
-map('n', '<leader><space>', ':noh<CR>')
+keymap('n', '<leader><space>', ':noh<CR>')
+
+-- Move selected lines
+-- Thanks @theprimeagean!
+keymap("v", "K", ":m '<-2<CR>gv=gv")
+keymap("v", "J", ":m '>+1<CR>gv=gv")
 
 -- <F>ile <T>ree
-map('n', '<leader>ft', ':NvimTreeToggle<CR>')
+keymap('n', '<leader>ft', ':NvimTreeToggle<CR>')
 
 -- Telescope
 local telescope_available, telescope = pcall(require, 'telescope.builtin')
 if telescope_available then
-    map('n', '<leader>fb', telescope.buffers, {})
+    keymap('n', '<leader>fb', telescope.buffers, {})
 
-    map('n', '<leader>ff', telescope.find_files, {})
-    map('n', '<leader>fg', telescope.live_grep, {})
+    keymap('n', '<leader>ff', telescope.find_files, {})
+    keymap('n', '<leader>fg', telescope.live_grep, {})
 end
 
 -- Diagnostics
-map('n', '[d', vim.diagnostic.goto_prev)
-map('n', ']d', vim.diagnostic.goto_next)
-map('n', '<leader>e', vim.diagnostic.open_float)
+keymap('n', '[d', vim.diagnostic.goto_prev)
+keymap('n', ']d', vim.diagnostic.goto_next)
+keymap('n', '<leader>e', vim.diagnostic.open_float)

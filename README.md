@@ -44,7 +44,11 @@ cd .dotfiles && ./install.sh --install.sh
 - `shellcheck`
 - Generate local config files automatically similarly to `.gitconfig.local`
 - Completions (e.g. docker)
+
+## vim/nvim
 - ~~Convert init.vim to Lua~~ (WIP)
+- Lua style/formatting
+- Basic `.vimrc` as fallback
 
 ### General/Install
 - Convert most things to Ansible

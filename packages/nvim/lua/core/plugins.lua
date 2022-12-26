@@ -21,6 +21,7 @@ require('packer').startup(function(use)
         requires = {
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
+            'folke/neodev.nvim',
         }
     }
 
