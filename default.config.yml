@@ -1,0 +1,36 @@
+---
+user_config_yml: user.config.yml
+
+###
+## MAC OS
+#
+homebrew_packages:
+  - cowsay
+  - direnv
+  - fzf
+  - git
+  - mas
+  - neovim
+  - npm
+  - python
+  - ripgrep
+  - the_silver_searcher
+  - zoxide
+  - zsh
+
+homebrew_cask_appdir: /Applications
+
+homebrew_cask_packages:
+  - docker
+  - iterm2
+
+homebrew_taps:
+  - homebrew/core
+  - homebrew/cask
+
+###
+## .dotfiles packages
+#
+dotfile_packages:
+  - { src: packages/nvim, dst: .config/nvim }
+

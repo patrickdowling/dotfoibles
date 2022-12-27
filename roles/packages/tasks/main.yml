@@ -1,0 +1,6 @@
+---
+- name: Install package symlinks
+  ansible.builtin.include_tasks: symlink.yml
+  with_items: "{{ dotfile_packages }}"
+
+# vim: ft=yaml.ansible

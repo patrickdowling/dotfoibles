@@ -1,0 +1,20 @@
+---
+- name: Provision system
+  hosts: all
+  vars_files:
+    - default.config.yml
+  pre_tasks:
+    - name: "Optional include {{ user_config_yml }}"
+      ansible.builtin.include_vars: "{{ user_config_yml }}"
+      when: user_config_yml is exists
+      tags: ['always']
+
+  roles:
+    - role: homebrew
+      when: ansible_os_family == "Darwin"
+      tags: homebrew
+
+    - role: packages
+      tags: packages
+
+# vim: ft=yaml.ansible

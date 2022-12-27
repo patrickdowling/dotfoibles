@@ -1,0 +1,22 @@
+---
+- name: "Check for existing {{ item.dst }}"
+  command: "ls -F ~/{{ item.dst }}"
+  register: existing_dotfile
+  failed_when: false
+  check_mode: false
+  changed_when: false
+
+- name: "Remove {{ item.dst }}"
+  file:
+    path: "~/{{ item.dst }}"
+    state: absent
+  when: "'@' not in existing_dotfile.stdout"
+
+- name: "Symlink {{ item.dst }} -> {{ item.src }}"
+  file:
+    src: "~/.dotfiles/{{ item.src }}"
+    dest: "~/{{ item.dst }}"
+    state: link
+    mode: 0744 # +x here since symlink might be a directory
+
+# vim: ft=yaml.ansible

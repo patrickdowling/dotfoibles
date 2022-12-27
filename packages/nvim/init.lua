@@ -1,7 +1,7 @@
 -- We might also just symlink the whole .config/nvim directory
 -- instead of messing with this half+half solution
-local dotfiles = vim.fn.expand("$HOME") .. "/.dotfiles"
-package.path = dotfiles .. "/packages/nvim/lua/?.lua;" .. package.path
+--local dotfiles = vim.fn.expand("$HOME") .. "/.dotfiles"
+--package.path = dotfiles .. "/packages/nvim/lua/?.lua;" .. package.path
 
 require('core.plugins')
 require('core.options')
