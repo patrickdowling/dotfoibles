@@ -5,7 +5,9 @@ user_config_yml: user.config.yml
 ## MAC OS
 #
 homebrew_packages:
+  - coreutils
   - cowsay
+  - clang-format
   - direnv
   - fzf
   - git

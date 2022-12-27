@@ -17,4 +17,9 @@
     - role: packages
       tags: packages
 
+  tasks:
+    - import_tasks: tasks/macos_settings.yml
+      when: ansible_os_family == "Darwin"
+      tags: macos_settings
+
 # vim: ft=yaml.ansible

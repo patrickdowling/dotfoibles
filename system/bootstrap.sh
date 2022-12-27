@@ -22,12 +22,17 @@ install_brew() {
     fi
 }
 
+check_binary() {
+    local path
+    path=$(command -v "$1")
+    [ -n "$path" ] || fail "$1 not found"
+    success "Found $1 at $path"
+}
+
 bootstrap_macos() {
     #log "Install xcode" && xcode-select --install
     install_brew
     log_exec brew update --quiet
-    log_exec pip3 install --upgrade pip
-    log_exec pip3 install ansible
 }
 
 case "$DOT_OS" in
@@ -37,3 +42,10 @@ case "$DOT_OS" in
     *)
         fail "Unsupported OS '$DOT_OS'"
 esac
+
+check_binary "git"
+check_binary "pip3"
+log_exec pip3 install --upgrade pip
+log_exec pip3 install ansible
+
+check_binary "ansible"

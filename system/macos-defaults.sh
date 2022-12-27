@@ -1,7 +1,10 @@
 #!/usr/bin/env sh
 set -e
 
-[ "$DOT_OS" = "macos" ] || exit 0
+. ./base/common.sh
+dot_detect_os
+[ "$DOT_OS" = "macos" ] || fatal "$DOT_OS not supported"
+success "DOT_OS=$DOT_OS"
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
@@ -11,16 +14,20 @@ osascript -e 'tell application "System Preferences" to quit'
 # Grabbed from things like
 # https://github.com/holman/dotfiles/blob/master/macos/set-defaults.sh
 # https://github.com/mathiasbynens/dotfiles/blob/master/.macos
+# https://github.com/geerlingguy/dotfiles/blob/master/.osx
 
 # Disable press-and-hold for keys in favor of key repeat.
 defaults write -g ApplePressAndHoldEnabled -bool false
 
+# Set a really fast key repeat.
+defaults write NSGlobalDomain InitialKeyRepeat -int 20
+defaults write NSGlobalDomain KeyRepeat -int 1
+#
+# Disable auto-correct
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
 # Always open everything in Finder's list view. This is important.
 defaults write com.apple.Finder FXPreferredViewStyle Nlsv
-
-# Set a really fast key repeat.
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 25
 
 # Finder: show hidden files by default
 #defaults write com.apple.finder AppleShowAllFiles -bool true

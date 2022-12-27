@@ -10,8 +10,6 @@ cat << EOF
 Valid actions are
 --check : check prerequisites
 --install : install things
---system_defaults : system default settings
---system_packages : install system packages
 EOF
 }
 (( $# )) || { dot_help; exit 1; }
@@ -22,11 +20,11 @@ EOF
 . ./base/common.sh
 dot_detect_os
 log "Detected OS: $DOT_OS"
-. ./system/system_packages
 
 DOT_ROOT="$(dirname "$(realpath "$0")")"
 cd "$DOT_ROOT"
 DOT_PACKAGES="$DOT_ROOT/packages"
+required_binaries=("zsh" "git" "nvim" "fzf" "zoxide")
 
 dot_symlinks() {
 	title "Symlinking symlinks..."
@@ -78,16 +76,6 @@ dot_install() {
 	dot_installers
 }
 
-dot_system_defaults() {
-	title "Setting system defaults..."
-
-	local system_defaults_sh="./system/$DOT_OS-defaults.sh"
-	if [ -x "$system_defaults_sh" ] ; then
-		. "$system_defaults_sh"
-		success "Executed $system_defaults_sh"
-	fi
-}
-
 ###
 ## "MAIN"
 #
@@ -96,8 +84,6 @@ do
 	case "$1" in
 		"--check") dot_check ;;
 		"--install") dot_install ;;
-		"--system_defaults") dot_system_defaults ;;
-		"--system_packages") dot_system_packages ;;
 		*) fail "Unknown action '$1'" ;;
 	esac
 	shift
