@@ -1,0 +1,6 @@
+---
+- name: Install symlinks
+  ansible.builtin.include_tasks: tasks/symlink.yml
+  with_items: "{{ nvim_symlinks }}"
+
+# vim: ft=yaml.ansible

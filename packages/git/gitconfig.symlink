@@ -7,7 +7,7 @@
 [rerere]
 	enabled = true
 [commit]
-	template = /Users/pat/.stCommitMsg
+	template = ~/.stCommitMsg
 
 [alias]
         ignore = !git update-index --assume-unchanged 

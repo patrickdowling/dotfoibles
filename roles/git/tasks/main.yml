@@ -1,0 +1,16 @@
+---
+# NOTE
+# We're symlinking ~/.gitconfig and ~/.gitignore instead of building them as a template
+
+- name: Install symlinks
+  ansible.builtin.include_tasks: tasks/symlink.yml
+  with_items: "{{ git_symlinks }}"
+
+- name: Create .gitconfig.local
+  ansible.builtin.template:
+    src: templates/gitconfig.local.j2
+    dest: ~/.gitconfig.local
+    mode: 0644
+  when: git_user_name|length > 0
+
+# vim: ft=yaml.ansible

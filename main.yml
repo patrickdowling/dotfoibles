@@ -10,12 +10,15 @@
       tags: ['always']
 
   roles:
-    - role: homebrew
+    - role: roles/homebrew
       when: ansible_os_family == "Darwin"
       tags: homebrew
 
-    - role: packages
-      tags: packages
+    - role: roles/nvim
+      tags: packages, nvim
+
+    - role: roles/git
+      tags: packages, git
 
   tasks:
     - import_tasks: tasks/macos_settings.yml

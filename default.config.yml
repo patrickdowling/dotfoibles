@@ -33,6 +33,5 @@ homebrew_taps:
 ###
 ## .dotfiles packages
 #
-dotfile_packages:
-  - { src: packages/nvim, dst: .config/nvim }
-
+nvim_enabled: true
+git_enabled: true
