@@ -1,0 +1,5 @@
+---
+nvim_symlinks:
+  - { src: packages/nvim, dst: .config/nvim }
+
+# vim: ft=yaml.ansible

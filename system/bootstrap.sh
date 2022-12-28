@@ -49,3 +49,6 @@ log_exec pip3 install --upgrade pip
 log_exec pip3 install ansible
 
 check_binary "ansible"
+check_binary "ansible-galaxy"
+
+log_exec ansible-galaxy collection install community.general

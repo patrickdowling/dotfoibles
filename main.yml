@@ -16,9 +16,15 @@
 
     - role: roles/nvim
       tags: packages, nvim
+      when: nvim_enabled
 
     - role: roles/git
       tags: packages, git
+      when: git_enabled
+
+    - role: roles/zsh
+      tags: packages, zsh
+      when: zsh_enabled
 
   tasks:
     - import_tasks: tasks/macos_settings.yml

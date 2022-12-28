@@ -1,0 +1,19 @@
+---
+
+# /etc/shells
+
+# TODO
+
+- name: Get zsh path
+  command: "which zsh"
+  register: which_zsh
+  changed_when: false
+
+- name: Set zsh as default shell
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: "{{ which_zsh.stdout_lines[0] }}"
+  when: zsh_chsh
+  become: true
+
+# vim: ft=yaml.ansible

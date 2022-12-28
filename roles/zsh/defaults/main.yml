@@ -1,0 +1,6 @@
+---
+zsh_enabled: false
+
+zsh_chsh: true
+
+# vim: ft=yaml.ansible

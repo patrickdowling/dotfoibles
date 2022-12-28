@@ -1,0 +1,6 @@
+---
+git_symlinks:
+  - { src: packages/git/gitconfig.symlink, dst: .gitconfig }
+  - { src: packages/git/gitignore.symlink, dst: .gitignore }
+
+# vim: ft=yaml.ansible

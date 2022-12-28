@@ -7,8 +7,4 @@ git_user_email: ""
 git_credential_helper: "osxkeychain"
 # git_credential_helper='cache'
 
-git_symlinks:
-  - { src: packages/git/gitconfig.symlink, dst: .gitconfig }
-  - { src: packages/git/gitignore.symlink, dst: .gitignore }
-
 # vim: ft=yaml.ansible
