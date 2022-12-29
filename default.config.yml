@@ -39,4 +39,5 @@ homebrew_taps:
 #
 git_enabled: true
 nvim_enabled: true
+themes_enabled: true
 zsh_enabled: true

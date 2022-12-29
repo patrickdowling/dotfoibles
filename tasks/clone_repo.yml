@@ -1,0 +1,9 @@
+---
+- name: "{{ item.repo }}"
+  git:
+    repo: "https://github.com/{{ item.repo }}.git"
+    dest: "{{ item.dest }}"
+    depth: 1
+    clone: true
+    update: true
+  when: item.when | default(true)

@@ -6,6 +6,8 @@
   ansible.builtin.include_tasks: tasks/symlink.yml
   with_items: "{{ git_symlinks }}"
 
+# TODO check if file exists?
+
 - name: Create .gitconfig.local
   ansible.builtin.template:
     src: templates/gitconfig.local.j2

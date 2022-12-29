@@ -21,8 +21,13 @@
       tags: packages, git
       when: git_enabled
 
+    - role: roles/themes
+      tags: packages, themes
+      when: themes_enabled
+
     - role: roles/zsh
       tags: packages, zsh
       when: zsh_enabled
+
 
 # vim: ft=yaml.ansible

@@ -1,0 +1,5 @@
+---
+# NOTE this is assumed in zsh scripts (DOT_THEMES)
+dot_themes: "$HOME/.local/share/themes"
+
+# vim: ft=yaml.ansible

@@ -1,0 +1,15 @@
+---
+- name: Create base directory
+  file:
+    path: "{{ dot_themes }}"
+    state: directory
+    mode: 0744
+
+- name: Clone themes...
+  include_tasks: tasks/clone_repo.yml
+  with_items:
+    - { repo: "tinted-theming/base16-fzf", dest: "{{ dot_themes }}/base16-fzf" }
+    - { repo: "tinted-theming/base16-iterm2", dest: "{{ dot_themes }}/base16-iterm2", when: "{{ ansible_os_family == 'Darwin' }}" }
+    - { repo: "aarowill/base16-gnome-terminal", dest: "{{ dot_themes }}/base16-gnome-terminal", when: "{{ ansible_os_family != 'Darwin' }}" }
+
+# vim: ft=yaml.ansible
