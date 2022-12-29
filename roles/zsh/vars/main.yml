@@ -1,3 +1,11 @@
 ---
 
+# These will need to match up with actual zsh variables
+zsh_config_dir: ".config/zsh"
+zsh_cache_dir: ".cache/zsh"
+
+zsh_symlinks:
+  - { src: packages/zsh/zshenv.symlink, dst: .zshenv }
+  - { src: packages/zsh, dst: "{{ zsh_config_dir }}" }
+
 # vim: ft=yaml.ansible

@@ -1,4 +1,10 @@
 ---
+- name: Update brew
+  homebrew:
+    update_homebrew: true
+
+- include_tasks: install_packages.yml
+
 - name: Run script to setup sane OS X defaults
   command: "system/macos-defaults.sh"
   changed_when: false

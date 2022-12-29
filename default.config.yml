@@ -5,7 +5,9 @@ user_config_yml: user.config.yml
 ## MAC OS
 #
 homebrew_packages:
+  - autoconf
   - coreutils
+  - curl
   - cowsay
   - clang-format
   - direnv
@@ -21,9 +23,11 @@ homebrew_packages:
   - zsh
 
 homebrew_cask_appdir: /Applications
+homebrew_cask_accept_external_apps: false
 
 homebrew_cask_packages:
   - docker
+  - dropbox
   - iterm2
 
 homebrew_taps:

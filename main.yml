@@ -10,9 +10,8 @@
       tags: ['always']
 
   roles:
-    - role: roles/homebrew
+    - role: roles/macos
       when: ansible_os_family == "Darwin"
-      tags: homebrew
 
     - role: roles/nvim
       tags: packages, nvim
@@ -25,10 +24,5 @@
     - role: roles/zsh
       tags: packages, zsh
       when: zsh_enabled
-
-  tasks:
-    - import_tasks: tasks/macos_settings.yml
-      when: ansible_os_family == "Darwin"
-      tags: macos_settings
 
 # vim: ft=yaml.ansible

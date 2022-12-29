@@ -1,13 +1,17 @@
 ---
 
-# /etc/shells
-
-# TODO
+# TODO there may be some details here about system vs homebrew version
 
 - name: Get zsh path
   command: "which zsh"
   register: which_zsh
   changed_when: false
+
+- name: Ensure zsh in /etc/shells
+  lineinfile:
+    path: /etc/shells
+    line: "{{ which_zsh.stdout_lines[0] }}"
+  become: true
 
 - name: Set zsh as default shell
   user:
@@ -15,5 +19,18 @@
     shell: "{{ which_zsh.stdout_lines[0] }}"
   when: zsh_chsh
   become: true
+
+- name: Install symlinks
+  ansible.builtin.include_tasks: tasks/symlink.yml
+  with_items: "{{ zsh_symlinks }}"
+
+- name: Create directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0644
+  loop:
+    - "~/{{ zsh_cache_dir }}/.zcompcache"
+    - "~/{{ zsh_cache_dir }}/completions"
 
 # vim: ft=yaml.ansible

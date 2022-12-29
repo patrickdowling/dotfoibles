@@ -1,4 +1,6 @@
 ---
+# TODO These assume they will land in $HOME; this might not be ideal?
+
 - name: "Check for existing {{ item.dst }}"
   command: "ls -F ~/{{ item.dst }}"
   register: existing_dotfile
