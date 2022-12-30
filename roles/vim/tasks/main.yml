@@ -1,0 +1,14 @@
+---
+- name: Install symlinks
+  ansible.builtin.include_tasks: tasks/symlink.yml
+  with_items:
+    - { src: packages/vim/vimrc.symlink, dst: .vimrc }
+
+# Not sure if required
+- name: Add directories
+  file:
+    path: "~/.vim"
+    state: directory
+    mode: 0744
+
+# vim: ft=yaml.ansible

@@ -17,17 +17,21 @@
       tags: devenv
       when: devenv_enabled
 
-    - role: roles/nvim
-      tags: packages, nvim
-      when: nvim_enabled
-
     - role: roles/git
       tags: packages, git
       when: git_enabled
 
+    - role: roles/nvim
+      tags: packages, nvim
+      when: nvim_enabled
+
     - role: roles/themes
       tags: packages, themes
       when: themes_enabled
+
+    - role: roles/vim
+      tags: packages, vim
+      when: vim_enabled
 
     - role: roles/zsh
       tags: packages, zsh

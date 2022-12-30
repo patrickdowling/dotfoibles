@@ -41,4 +41,5 @@ devenv_enabled: true
 git_enabled: true
 nvim_enabled: true
 themes_enabled: true
+vim_enabled: false
 zsh_enabled: true
