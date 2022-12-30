@@ -28,7 +28,7 @@
   file:
     path: "{{ item }}"
     state: directory
-    mode: 0644
+    mode: 0744
   loop:
     - "~/{{ zsh_cache_dir }}/.zcompcache"
     - "~/{{ zsh_cache_dir }}/completions"

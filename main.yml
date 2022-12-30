@@ -13,6 +13,10 @@
     - role: roles/macos
       when: ansible_os_family == "Darwin"
 
+    - role: roles/devenv
+      tags: devenv
+      when: devenv_enabled
+
     - role: roles/nvim
       tags: packages, nvim
       when: nvim_enabled
@@ -28,6 +32,5 @@
     - role: roles/zsh
       tags: packages, zsh
       when: zsh_enabled
-
 
 # vim: ft=yaml.ansible

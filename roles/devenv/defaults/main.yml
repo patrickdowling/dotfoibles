@@ -1,0 +1,5 @@
+---
+
+devenv_enabled: false
+
+# vim: ft=yaml.ansible

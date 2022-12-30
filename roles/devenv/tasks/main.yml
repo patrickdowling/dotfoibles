@@ -1,0 +1,12 @@
+---
+- name: Create project root directory
+  file:
+    path: "{{ devenv_root }}"
+    state: directory
+    mode: 0744
+
+- name: Install symlinks
+  ansible.builtin.include_tasks: tasks/symlink.yml
+  with_items: "{{ devenv_symlinks }}"
+
+# vim: ft=yaml.ansible

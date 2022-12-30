@@ -1,0 +1,8 @@
+---
+
+devenv_root: ~/dev
+
+devenv_symlinks:
+  - { src: packages/devenv/editorconfig.symlink, dst: "dev/.editorconfig" }
+
+# vim: ft=yaml.ansible
