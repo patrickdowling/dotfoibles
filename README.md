@@ -1,39 +1,61 @@
 # Just another dotfile collection
-So it's recently become increasingly apparent that
-- I've been avoiding (shell) scripting for far too long...
-- My various dotfiles are, to put it nicely, a mess of copypasta and fickle preferences...
-- It doesn't help that they are distributed across various systems, with a mix of OSes, work and leisure.
-- Sharing them (via symlinks into dropbox et al.) hasn't worked out as well as it might have and something always
-  seems to get lost.
 
-So it seems a good way to solve ALL THE THINGS! is some kind of (semi-) automatic dotfile installer thing. Of which there are, admittedly, already many.
+The initial version of this repository was both an exercise in shell scripting and an attempt to unify my dotfiles and configs, which were a mess of copypasta and fickle preferences strewn across work/home and a mix of OS.
+It has since been converted to use `ansible` for the installation (for better or worse). The actual configurations and settings are still a work-in-progress...
 
-"How hard can it be?"
+Yes, there are nice things like [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook) and others that already handle most or even a lot of the required functionality.
+Aside from an unhealthy dose of NIH need-to-see-under-the-hood, I find that re-implementing things for which I have an actual use to be very instructive.
 
 I don't really expect anyone else to use this directly. Perhaps it's interesting or at least good for a laugh.
-Definitely assume it will be in flux.
+Definitely assume it will be in flux and possibly destructive.
 
 ## Guidelines
-- The "topic" approach seen in other dotfile collections seems useful, so most things live in the `packages` dir.
-- Anything file ending with `.symlink` is linked as `$HOME/.<filename>`
-- If there's an `install.sh` in a subdirectory, it will be called and can do more complex things.
-- Common actions are available in such scripts:
- - `dot_install_symlink src target` checks if the symlink already exists, and can skip/overwrite.
- - `dot_install_directory dir` checks if the directory exists, otherwise it gets created.
-- The variable `$DOT_OS` is automatically set to either `macos` or `linux`.
-- There's some pretty printing log functions (see `common.sh`)
+- The "topic" approach seen in other dotfile collections seems useful, so most things that get symlinked into `$HOME` live in the `packages` dir.
+- Anything file ending with `.symlink` is linked as `$HOME/.<filename>` (this is somewhat a remnant of the original shell scripts).
+- All the actual "work" is done within ansible `roles/xxxx`. This is, admittedly, somewhat less than ideal since it means tracking things in two places.
 
 ## Installation
 ```
 cd ~
 git clone git@github.com:patrickdowling/dotfoibles.git .dotfiles
-cd .dotfiles && ./install.sh --install.sh
+cd .dotfiles
+./system/bootstrap.sh
+```
+(optional: setup `user.config.yml`)
+```
+ansible-playbook main.yml -K
 ```
 
+## Package details
+### devenv
+My main projects directory has ended up as `~/dev`. Perhaps not the best choice but oh well :)
+
+### docker
+- This is basically a placeholder for aliases.
+- The zsh completions are now installed by `roles/zsh`.
+- Eventually this might just be merged with other things (or, use an existing zsh plugin).
+
+### zsh
+- aliases are defined by packages in a `packages/package/package-aliases.zsh` file.
+
+### git
+- Creates some local config files
+- `$HOME/.gitconfig.local` with `user.name` and `user.email` is created if the variables are set (e.g. in `user.config.yml`)
+
+### neovim
+- `neovim` configuration has been ported to lua; `.vimrc` is in limbo (see below).
+
+### themes
+- Needs work ;)
+- Installed in `.local/share/themes` (`$DOT_THEMES` environment variable)
+- There's a `zsh` function `dot_themes_update` that updates the repositories (or, just use the playbook again).
+
 ## Vague To-Dos
-### Linux (Ubuntu)
-- don't forget to `chsh -s $(which zsh)` (also add to `/etc/shells`)
-- Set up `.zshenv.local` with `eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"`
+- There's still a lot of interdependency between packages, so `zsh` startup requires themes, the directory structure has to match, etc. This might be templatized.
+- So while it's theoretically possible to use tags to install a subset of things, that's not currently recommened.
+
+### Linux
+- Use homebrew? Remember to update `.zshenv.local` with `eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"`
 
 ### Features
 - zsh: Key bindings
@@ -46,15 +68,13 @@ cd .dotfiles && ./install.sh --install.sh
 - Completions (e.g. docker)
 
 ## vim/nvim
-- ~~Convert init.vim to Lua~~ (WIP)
+- ~~Convert init.vim to Lua~~
 - Lua style/formatting
+- clang-format
 - Basic `.vimrc` as fallback
 
 ### General/Install
-- Convert most things to Ansible
-- ...at which point it might be useful to separate configs/dotfiles from provisioning/install
-- There's the beginnings of a prerequisistes check (`install.sh --check`) but that might not be necessary
-- Install binaries/packages/missing bits; `brew` is already somewhat supported; there aren't as many packages as expected.
 - Fonts & things?
 - python, pip etc.
+- asdf or similar
 - https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html
