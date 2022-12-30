@@ -33,4 +33,12 @@
     - "~/{{ zsh_cache_dir }}/.zcompcache"
     - "~/{{ zsh_cache_dir }}/completions"
 
+# NOTE this used to live in packages/docker/installer.sh
+# Better option might be to support it as a plugin
+
+- name: Docker completion (not a plugin)
+  uri:
+    url: https://raw.githubusercontent.com/docker/cli/master/contrib/completion/zsh/_docker
+    dest: "~/{{ zsh_cache_dir }}/completions/_docker"
+
 # vim: ft=yaml.ansible

@@ -1,0 +1,1 @@
+alias hd='hexdump -C'
