@@ -6,10 +6,10 @@ user_config_yml: user.config.yml
 #
 homebrew_packages:
   - autoconf
+  - clang-format
   - coreutils
   - curl
   - cowsay
-  - clang-format
   - direnv
   - fzf
   - git
@@ -18,6 +18,7 @@ homebrew_packages:
   - npm
   - python
   - ripgrep
+  - shellcheck
   - the_silver_searcher
   - zoxide
   - zsh

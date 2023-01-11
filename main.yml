@@ -12,6 +12,7 @@
   roles:
     - role: roles/macos
       when: ansible_os_family == "Darwin"
+      tags: system
 
     - role: roles/devenv
       tags: devenv

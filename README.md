@@ -34,6 +34,7 @@ My main projects directory has ended up as `~/dev`. Perhaps not the best choice 
 - This is basically a placeholder for aliases.
 - The zsh completions are now installed by `roles/zsh`.
 - Eventually this might just be merged with other things (or, use an existing zsh plugin).
+- For "work" scenarios replace docker with containerd/nerdctl and/or colima
 
 ### zsh
 - aliases are defined by packages in a `packages/package/package-aliases.zsh` file.
@@ -59,18 +60,17 @@ My main projects directory has ended up as `~/dev`. Perhaps not the best choice 
 
 ### Features
 - zsh: Key bindings
-- .clang-format template
+- zsh: Local aliases file
+- `.clang-format`, `.clang-tidy`et al templates
 - .editorconfig
-- makefile templates
-- aliases
+- makefile et al templates
 - `shellcheck`
 - Generate local config files automatically similarly to `.gitconfig.local`
-- Completions (e.g. docker)
 
 ## vim/nvim
 - ~~Convert init.vim to Lua~~
-- Lua style/formatting
-- clang-format
+- ~~Lua style/formatting~~ -> should be convered with `neodev`
+- clang-format, clang-tidy templates
 - Basic `.vimrc` as fallback
 
 ### General/Install
