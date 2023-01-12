@@ -36,6 +36,12 @@ homebrew_taps:
   - homebrew/cask
 
 ###
+## Other packages
+##
+pip_packages:
+  - ansible-lint
+
+###
 ## .dotfiles packages
 #
 devenv_enabled: true
