@@ -10,6 +10,10 @@ keymap('n', '<leader><space>', ':noh<CR>')
 keymap("v", "K", ":m '<-2<CR>gv=gv")
 keymap("v", "J", ":m '>+1<CR>gv=gv")
 
+-- Better indent
+keymap('v', '<', '<gv')
+keymap('v', '>', '>gv')
+
 -- <F>ile <T>ree
 keymap('n', '<leader>ft', ':NvimTreeToggle<CR>')
 
