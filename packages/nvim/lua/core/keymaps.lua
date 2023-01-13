@@ -14,17 +14,28 @@ keymap("v", "J", ":m '>+1<CR>gv=gv")
 keymap('v', '<', '<gv')
 keymap('v', '>', '>gv')
 
--- <F>ile <T>ree
-keymap('n', '<leader>ft', ':NvimTreeToggle<CR>')
+-- Window
+keymap('n', '<c-h>', '<c-w>h', { desc = 'Move to left window' })
+keymap('n', '<c-j>', '<c-w>j', { desc = 'Move to lower window' })
+keymap('n', '<c-k>', '<c-w>k', { desc = 'Move to upper window' })
+keymap('n', '<c-l>', '<c-w>l', { desc = 'Move to right window' })
+
+-- [T]ree [F]iles
+local tree_available, api = pcall(require, 'nvim-tree.api')
+if tree_available then
+    keymap('n', '<leader>tf', api.tree.toggle)
+end
 
 -- <leader>Find (Telescope)
+-- TODO I'm now thinking [S]earch may indeed be better?
 local telescope_available, telescope = pcall(require, 'telescope.builtin')
 if telescope_available then
     keymap('n', '<leader>fb', telescope.buffers, {})
 
-    keymap('n', '<leader>ff', telescope.find_files, {})
+    keymap('n', '<leader>ff', telescope.find_files, {}) -- [F]ind [F]iles
     keymap('n', '<leader>fg', telescope.live_grep, {})
     keymap('n', '<leader>?', telescope.oldfiles)
+    keymap('n', '<leader>fl', telescope.resume) -- [F]ind [L]ast
 
     keymap('n', '<leader>df', telescope.diagnostics)
 end

@@ -13,6 +13,7 @@ local lsp_servers = {
     ansiblels = {},
     bashls = {},
     clangd = {},
+    pyright = {},
     sumneko_lua = {
         Lua = {
             --diagnostics = { globals = { 'vim' } } -- Undefined global 'vim'
