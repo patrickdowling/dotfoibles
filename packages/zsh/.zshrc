@@ -19,6 +19,7 @@ zsh_file_source "$ZDOTDIR/zsh-$ZOS"
 zsh_file_source "$ZDOTDIR/.p10k.zsh"
 zsh_plugins_add "romkatv/powerlevel10k" "powerlevel10k.zsh-theme"
 zsh_plugins_add "zsh-users/zsh-completions"
+zsh_plugins_add "zsh-users/zsh-autosuggestions"
 AUTOPAIR_INHIBIT_INIT=1
 zsh_plugins_add "hlissner/zsh-autopair"
 
