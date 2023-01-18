@@ -26,15 +26,31 @@ require('packer').startup(function(use)
     }
 
     use {
+        'hrsh7th/nvim-cmp',
+        requires = {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            'hrsh7th/nvim-cmp',
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip'
+        }
+    }
+
+    use {
         'nvim-treesitter/nvim-treesitter',
         run = function()
             pcall(require('nvim-treesitter.install').update { with_sync = true })
         end
     }
+    use {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        after = 'nvim-treesitter',
+    }
 
     use 'tpope/vim-sensible'
     use 'nvim-lualine/lualine.nvim'
-    use 'RRethy/nvim-base16'
 
     use {
         'nvim-tree/nvim-tree.lua',
@@ -52,6 +68,7 @@ require('packer').startup(function(use)
             'nvim-lua/plenary.nvim'
         }
     }
+    use 'RRethy/nvim-base16'
 
     if packer_bootstrap then
         require('packer').sync()

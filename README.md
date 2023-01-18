@@ -70,8 +70,10 @@ My main projects directory has ended up as `~/dev`. Perhaps not the best choice 
 ## vim/nvim
 - ~~Convert init.vim to Lua~~
 - ~~Lua style/formatting~~ -> should be convered with `neodev`
-- clang-format, clang-tidy templates
+- ~~Completions~~ -> preliminary config seems to work
+- clang-format, clang-tidy templates (possible duplicate from above)
 - Basic `.vimrc` as fallback
+- Snippets. `luasnip` is currently configured as a plugin, but we're not sourcing anything yet (...and it's never been part of my workflow).
 
 ### General/Install
 - Fonts & things?

@@ -24,6 +24,8 @@ local prev_item = function(fallback)
     end
 end
 
+-- Note to self: keyword_length for sources
+
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -49,6 +51,8 @@ cmp.setup({
         ['<S-Tab>'] = cmp.mapping(prev_item, { 'i', 's' }),
     }),
 })
+
+-- These might be overkill...
 
 -- `/` cmdline setup.
 cmp.setup.cmdline('/', {

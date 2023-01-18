@@ -23,6 +23,14 @@ local lsp_servers = {
     }
 }
 
+-- nvim-cmp additions
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+local cmp_status, cmp = pcall(require, 'cmp_nvim_lsp')
+if cmp_status then
+    capabilities = cmp.default_capabilities(capabilities)
+end
+
+
 local on_attach = function(_, bufnr)
     local nmap_buffer = function(keys, func, desc)
         if desc then desc = 'LSP: ' .. desc end
@@ -44,9 +52,15 @@ mason_lspconfig.setup { ensure_installed = vim.tbl_keys(lsp_servers) }
 mason_lspconfig.setup_handlers {
     function(server_name)
         require("lspconfig")[server_name].setup {
-            -- capabilities
+            capabilities = capabilities,
             on_attach = on_attach,
             settings = lsp_servers[server_name]
         }
     end
 }
+
+local lsp = vim.lsp
+
+lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
+    border = "rounded",
+})

@@ -2,10 +2,12 @@ local opt = vim.opt
 
 -- Some of these are pre-loaded by vim-sensible
 
-opt.backspace = {"indent", "eol", "start"}
+opt.backspace = { "indent", "eol", "start" }
 opt.errorbells = false
 opt.visualbell = false
 opt.mouse = 'a'
+
+opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
 -- Line numbers
 opt.number = true -- ...line numbers
@@ -16,15 +18,15 @@ opt.cursorline = true -- ...highlight line with cursor
 opt.termguicolors = true
 opt.background = "dark"
 opt.signcolumn = "yes"
-opt.listchars = { tab='→ ', eol='¬', trail='⋅', extends='❯', precedes='❮' }
-opt.showbreak='↪'
+opt.listchars = { tab = '→ ', eol = '¬', trail = '⋅', extends = '❯', precedes = '❮' }
+opt.showbreak = '↪'
 opt.list = true
 
 -- Line wrapping
 opt.wrap = true
 opt.wrapmargin = 8
 opt.linebreak = true
-opt.showbreak='…'
+opt.showbreak = '…'
 
 -- Search
 opt.ignorecase = true -- case insensitive
