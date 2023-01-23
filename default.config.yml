@@ -29,6 +29,9 @@ homebrew_cask_accept_external_apps: false
 homebrew_cask_packages:
   - docker
   - dropbox
+  - font-inconsolata-nerd-font
+  - font-meslo-lg-nerd-font
+  - font-sauce-code-pro-nerd-font
   - iterm2
 
 homebrew_taps:
