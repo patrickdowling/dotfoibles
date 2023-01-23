@@ -1,5 +1,6 @@
 local cmp_status, cmp = pcall(require, 'cmp')
 local luasnip_status, luasnip = pcall(require, 'luasnip')
+local lspkind_status, lspkind = pcall(require, 'lspkind')
 
 if not cmp_status or not luasnip_status then return end
 
@@ -24,9 +25,23 @@ local prev_item = function(fallback)
     end
 end
 
--- Note to self: keyword_length for sources
+local formatting = {}
+if lspkind_status then
+    formatting.format = lspkind.cmp_format {
+        mode = 'symbol_text',
+        maxwidth = 50,
+        ellipsis_char = '...',
+        menu = ({
+            buffer = "[buf]",
+            nvim_lsp = "[LSP]",
+            luasnip = "[snip]",
+            path = "[path]",
+            cmdline = "[cmd]",
+        }),
+    }
+end
 
-cmp.setup({
+cmp.setup {
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -37,20 +52,21 @@ cmp.setup({
         documentation = cmp.config.window.bordered(),
     },
     sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
+        { name = 'nvim_lsp', keyword_length = 2 },
+        { name = 'luasnip', keyword_length = 3 },
     }, {
-        { name = 'buffer' },
+        { name = 'buffer', keyword_length = 2 },
     }),
-    mapping = cmp.mapping.preset.insert({
+    formatting = formatting,
+    mapping = cmp.mapping.preset.insert {
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true, }),
+        ['<CR>'] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Replace, select = true, },
         ['<Tab>'] = cmp.mapping(next_item, { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(prev_item, { 'i', 's' }),
-    }),
-})
+    },
+}
 
 -- These might be overkill...
 
@@ -58,7 +74,7 @@ cmp.setup({
 cmp.setup.cmdline('/', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
-        { name = 'buffer' }
+        { name = 'buffer', keyword_length = 3 }
     }
 })
 
@@ -68,6 +84,6 @@ cmp.setup.cmdline(':', {
     sources = cmp.config.sources({
         { name = 'path' }
     }, {
-        { name = 'cmdline' }
+        { name = 'cmdline', keyword_length = 2 }
     })
 })

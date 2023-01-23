@@ -58,9 +58,3 @@ mason_lspconfig.setup_handlers {
         }
     end
 }
-
-local lsp = vim.lsp
-
-lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, {
-    border = "rounded",
-})
