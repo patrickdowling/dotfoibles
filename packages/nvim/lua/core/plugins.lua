@@ -13,6 +13,7 @@ local ensure_packer = function()
 end
 local packer_bootstrap = ensure_packer()
 
+
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
@@ -22,7 +23,8 @@ require('packer').startup(function(use)
             'williamboman/mason.nvim',
             'williamboman/mason-lspconfig.nvim',
             'folke/neodev.nvim',
-        }
+        },
+        config = function() require("plugin_config.nvim-lspconfig").setup() end,
     }
 
     use {
@@ -36,14 +38,16 @@ require('packer').startup(function(use)
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
             'onsails/lspkind.nvim',
-        }
+        },
+        config = function() require("plugin_config.nvim-cmp").setup() end,
     }
 
     use {
         'nvim-treesitter/nvim-treesitter',
         run = function()
             pcall(require('nvim-treesitter.install').update { with_sync = true })
-        end
+        end,
+        config = function() require('plugin_config.nvim-treesitter').setup() end
     }
     use {
         'nvim-treesitter/nvim-treesitter-textobjects',
@@ -51,13 +55,16 @@ require('packer').startup(function(use)
     }
 
     use 'tpope/vim-sensible'
-    use 'nvim-lualine/lualine.nvim'
+    use { 'nvim-lualine/lualine.nvim',
+        config = function() require('plugin_config.lualine').setup() end
+    }
 
     use {
         'nvim-tree/nvim-tree.lua',
         requires = {
             'nvim-tree/nvim-web-devicons'
-        }
+        },
+        config = function() require('plugin_config.nvim-tree').setup() end,
     }
 
     use 'gpanders/editorconfig.nvim'
@@ -66,8 +73,10 @@ require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
         requires = {
-            'nvim-lua/plenary.nvim'
-        }
+            'nvim-lua/plenary.nvim',
+            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+        },
+        config = function() require('plugin_config.telescope').setup() end
     }
     use 'RRethy/nvim-base16'
 

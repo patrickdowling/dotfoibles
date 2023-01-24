@@ -1,4 +1,7 @@
-local status, nvimtree = pcall(require, 'nvim-tree')
-if not status then return end
+local M = {}
 
-nvimtree.setup {}
+function M.setup()
+    require('nvim-tree').setup {}
+end
+
+return M

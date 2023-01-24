@@ -1,5 +1,7 @@
 local opt = vim.opt
 
+vim.g.mapleader = ","
+
 -- Some of these are pre-loaded by vim-sensible
 
 opt.backspace = { "indent", "eol", "start" }
@@ -8,6 +10,9 @@ opt.visualbell = false
 opt.mouse = 'a'
 
 opt.completeopt = { 'menu', 'menuone', 'noselect' }
+
+opt.updatetime = 250
+--opt.clipboard:append { 'unnamed' }--, 'unnamedplus' }
 
 -- Line numbers
 opt.number = true -- ...line numbers

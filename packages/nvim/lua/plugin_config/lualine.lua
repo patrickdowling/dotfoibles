@@ -1,9 +1,12 @@
-local status, lualine = pcall(require, "lualine")
-if not status then return end
+M = {}
 
-lualine.setup {
-    options = {
-        icons_enabled = true,
-        theme = 'base16'
-    },
-}
+function M.setup()
+    require('lualine').setup {
+        options = {
+            icons_enabled = true,
+            theme = 'base16'
+        },
+    }
+end
+
+return M

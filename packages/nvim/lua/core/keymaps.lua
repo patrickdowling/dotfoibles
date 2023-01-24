@@ -1,9 +1,12 @@
 -- General bindings
-vim.g.mapleader = ","
 
 local keymap = vim.keymap.set
 
 keymap('n', '<leader><space>', ':noh<CR>')
+
+-- TODO clipboard
+keymap({ "n" }, "<leader>p", '"+p')
+keymap({ "n" }, "<leader>P", '"+P')
 
 -- Move selected lines
 -- Thanks @theprimeagean!

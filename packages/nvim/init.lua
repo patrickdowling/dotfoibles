@@ -25,15 +25,9 @@ g.loaded_vimball = 1
 g.loaded_vimballPlugin = 1
 g.loaded_2html_plugin = 1
 
-require('core.plugins')
 require('core.options')
+require('core.plugins')
 require('core.autocmds')
 require('core.keymaps')
 require('core.diagnostic')
-require('plugin_config.lualine')
-require('plugin_config.nvim-tree')
-require('plugin_config.telescope')
-require('plugin_config.treesitter')
-require('plugin_config.lsp_config')
-require('plugin_config.nvim-cmp')
 require('core.colorscheme')
