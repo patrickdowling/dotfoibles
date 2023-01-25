@@ -33,9 +33,18 @@ end
 -- TODO I'm now thinking [S]earch may indeed be better?
 local telescope_available, telescope = pcall(require, 'telescope.builtin')
 if telescope_available then
-    keymap('n', '<leader>fb', telescope.buffers, {})
 
-    keymap('n', '<leader>ff', telescope.find_files, {}) -- [F]ind [F]iles
+    local function find_git_or_files(opts)
+        local success = pcall(telescope.git_files, opts)
+        if not success then
+            telescope.find_files(opts)
+        end
+    end
+
+    keymap('n', '<leader>fb', telescope.buffers, {})
+    keymap('n', '<leader>fc', function() telescope.find_files { follow = true, cwd = vim.fn.expand('%:p:h') } end, {})
+    keymap('n', '<leader>ff', function() find_git_or_files { follow = true } end, {}) -- [F]ind [F]iles
+    keymap('n', '<leader>fF', telescope.find_files, {})
     keymap('n', '<leader>fg', telescope.live_grep, {})
     keymap('n', '<leader>?', telescope.oldfiles)
     keymap('n', '<leader>fl', telescope.resume) -- [F]ind [L]ast
