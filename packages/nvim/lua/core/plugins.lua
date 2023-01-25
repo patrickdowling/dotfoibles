@@ -79,6 +79,9 @@ require('packer').startup(function(use)
         config = function() require('plugin_config.telescope').setup() end
     }
     use 'RRethy/nvim-base16'
+    use { 'numToStr/Comment.nvim',
+        config = function() require('plugin_config.Comment').setup() end
+    }
 
     if packer_bootstrap then
         require('packer').sync()

@@ -14,7 +14,7 @@ function M.setup()
         pyright = {},
         sumneko_lua = {
             Lua = {
-                --diagnostics = { globals = { 'vim' } } -- Undefined global 'vim'
+                diagnostics = { globals = { 'vim' } }, -- Undefined global 'vim'
                 workspace = { checkThirdParty = false },
                 telemetry = { enable = false },
             },
