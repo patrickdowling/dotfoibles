@@ -1,10 +1,16 @@
-M = {}
+M = {
+    'nvim-lualine/lualine.nvim',
+    dependencies = {
+        'RRethy/nvim-base16',
+    },
+    event = 'VeryLazy'
+}
 
-function M.setup()
+function M.config()
     require('lualine').setup {
         options = {
             icons_enabled = true,
-            theme = 'base16'
+            theme = 'auto'
         },
         extensions = {
             'quickfix',

@@ -1,6 +1,19 @@
-local M = {}
+local M = {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/cmp-path',
+        'hrsh7th/cmp-cmdline',
+        'hrsh7th/nvim-cmp',
+        'L3MON4D3/LuaSnip',
+        'saadparwaiz1/cmp_luasnip',
+        'onsails/lspkind.nvim',
+    },
+    event = "InsertEnter"
+}
 
-function M.setup()
+function M.config()
     local cmp_status, cmp = pcall(require, 'cmp')
     local luasnip_status, luasnip = pcall(require, 'luasnip')
     local lspkind_status, lspkind = pcall(require, 'lspkind')

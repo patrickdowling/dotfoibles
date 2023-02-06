@@ -1,4 +1,10 @@
-local M = {}
+local M = {
+    'nvim-telescope/telescope.nvim',
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+    },
+}
 
 local file_ignore_patterns = {
     "%.DS_Store",
@@ -9,8 +15,7 @@ local file_ignore_patterns = {
     "%.pdf",
 }
 
-
-function M.setup()
+function M.config()
     local actions = require 'telescope.actions'
     local telescope = require 'telescope'
 

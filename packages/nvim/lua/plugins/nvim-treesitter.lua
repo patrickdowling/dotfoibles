@@ -1,6 +1,13 @@
-local M = {}
+local M = {
+    'nvim-treesitter/nvim-treesitter',
+    build = function() pcall(require('nvim-treesitter.install').update { with_sync = true }) end,
+    event = "BufReadPost",
+    dependencies = {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+    },
+}
 
-function M.setup()
+function M.config()
     local treesitter = require('nvim-treesitter.configs')
 
     treesitter.setup {

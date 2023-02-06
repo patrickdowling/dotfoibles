@@ -1,7 +1,15 @@
-local M = {}
+local M = {
+    'neovim/nvim-lspconfig',
+    dependencies = {
+        'williamboman/mason.nvim',
+        'williamboman/mason-lspconfig.nvim',
+        'folke/neodev.nvim',
+    },
+    event = 'BufReadPre'
+}
 
-function M.setup()
-    local neodev = require('neodev')
+function M.config()
+    -- local neodev = require('neodev')
     local mason = require('mason')
 
     mason.setup()
