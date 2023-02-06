@@ -6,6 +6,10 @@ function M.setup()
             icons_enabled = true,
             theme = 'base16'
         },
+        extensions = {
+            'quickfix',
+            'nvim-tree',
+        }
     }
 end
 
