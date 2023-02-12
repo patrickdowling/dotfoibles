@@ -9,9 +9,10 @@ local M = {
 }
 
 function M.config()
-    -- local neodev = require('neodev')
-    local mason = require('mason')
+    local neodev = require('neodev')
+    neodev.setup({})
 
+    local mason = require('mason')
     mason.setup()
 
     -- Settings for lsp servers
@@ -20,7 +21,7 @@ function M.config()
         bashls = {},
         clangd = {},
         pyright = {},
-        sumneko_lua = {
+        lua_ls = {
             Lua = {
                 diagnostics = { globals = { 'vim' } }, -- Undefined global 'vim'
                 workspace = { checkThirdParty = false },

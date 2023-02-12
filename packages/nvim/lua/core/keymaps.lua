@@ -42,12 +42,14 @@ if telescope_available then
     end
 
     keymap('n', '<leader>fb', telescope.buffers, {})
-    keymap('n', '<leader>fc', function() telescope.find_files { follow = true, cwd = vim.fn.expand('%:p:h') } end, {})
+    keymap('n', '<leader>fcb', telescope.current_buffer_fuzzy_find, {})
+    keymap('n', '<leader>fcd', function() telescope.find_files { follow = true, cwd = vim.fn.expand('%:p:h') } end, {})
     keymap('n', '<leader>ff', function() find_git_or_files { follow = true } end, {}) -- [F]ind [F]iles
     keymap('n', '<leader>fF', telescope.find_files, {})
     keymap('n', '<leader>fg', telescope.live_grep, {})
     keymap('n', '<leader>?', telescope.oldfiles)
     keymap('n', '<leader>fl', telescope.resume) -- [F]ind [L]ast
+    keymap('n', '<leader>fs', telescope.grep_string)
 
     keymap('n', '<leader>df', telescope.diagnostics)
 end
