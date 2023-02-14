@@ -13,8 +13,10 @@ return {
         lazy = 'true',
     },
     -- 'tpope/vim-sensible', -> neovim has mostly sensible defaults anyway
+    -- NOTE Neovim 0.9 has EditorConfig integration builtin, so this plugin is no longer necessary
     {
         'gpanders/editorconfig.nvim',
-        lazy = 'VeryLazy',
+        event = 'BufReadPre',
+        cond = (0 == vim.fn.has('nvim-0.9')),
     },
 }
