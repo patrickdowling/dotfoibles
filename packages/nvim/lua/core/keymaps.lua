@@ -49,6 +49,7 @@ if telescope_available then
     keymap('n', '<leader>fg', telescope.live_grep, {})
     keymap('n', '<leader>?', telescope.oldfiles)
     keymap('n', '<leader>fl', telescope.resume) -- [F]ind [L]ast
+    keymap('n', '<leader>fq', telescope.quickfix)
     keymap('n', '<leader>fs', telescope.grep_string)
 
     keymap('n', '<leader>df', telescope.diagnostics)
