@@ -4,7 +4,8 @@
 
 zmodload zsh/complist
 
-setopt menu_complete
+setopt autolist
+unsetopt menucomplete
 
 [ -d "$ZSH_COMP_CACHE" ] || mkdir -p "$ZSH_COMP_CACHE"
 zsh_fpath_add "$ZSH_COMP_CACHE"
