@@ -46,3 +46,5 @@ zsh_file_source ~/.fzf.zsh
 
 autopair-init
 zsh_plugins_add "zsh-users/zsh-syntax-highlighting" # "must be sourced last"
+
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
