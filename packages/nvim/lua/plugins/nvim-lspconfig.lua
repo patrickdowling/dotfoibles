@@ -21,6 +21,7 @@ function M.config()
         ansiblels = {},
         bashls = {},
         clangd = {},
+        cmake = {},
         pyright = {},
         lua_ls = {
             Lua = {
