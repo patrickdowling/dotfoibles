@@ -3,7 +3,7 @@ local M = {
     dependencies = {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
-        { 'j-hui/fidget.nvim', opts = {} },
+        { 'j-hui/fidget.nvim', opts = {}, tag='legacy' },
         'folke/neodev.nvim',
     },
     event = 'BufReadPre'
