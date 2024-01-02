@@ -5,6 +5,8 @@ function fatal() { echo "ERROR $@"; exit 1; }
 function verbose() { [ "$VERBOSE" = "yes" ] && echo "$@"; }
 
 DRYRUN=no
+DATE=
+
 
 while [[ $# -gt 0 ]] ; do
 	case $1 in
@@ -12,7 +14,10 @@ while [[ $# -gt 0 ]] ; do
 			AUTHOR="$2"
 			shift 2
 			;;
-
+		--date)
+			DATE="$2"
+			shift 2
+			;;
 		--dry-run)
 			DRYRUN=yes
 			shift
@@ -38,11 +43,16 @@ done
 [ -n "$AUTHOR" ] || fatal "missing author"
 [ -n "$PROJECT" ] || fatal "missing project"
 [ -e "$LICENSE" ] || fatal "missing or invalid license $LICENSE"
+if [ -z "$DATE" ] ; then
+	DATE="$(date +"%Y")"
+fi
+
+verbose "$PROJECT"
+verbose "// Copyright (C) $DATE $AUTHOR"
 
 SKIPPED=()
 IGNORED=()
 MODIFIED=()
-
 
 function check_file() {
 	local filename=$1
@@ -65,7 +75,8 @@ function check_file() {
 	if [ "$DRYRUN" = "no" ] ; then
 		local mod="$filename.tmp"
 		echo "// $PROJECT" > "$mod"
-		echo "// Copyright (C) $(date +"%Y") $AUTHOR" >> "$mod"
+		echo "//" >> "$mod"
+		echo "// Copyright (C) $DATE $AUTHOR" >> "$mod"
 		cat "$LICENSE" >> "$mod"
 		cat "$filename" >> "$mod"
 		mv "$mod" "$filename"
@@ -92,7 +103,3 @@ for f in ${MODIFIED[*]}; do
 done
 
 echo "${#SKIPPED[@]} skipped, ${#IGNORED[@]} ignored, ${#MODIFIED[@]} modified (dryrun=$DRYRUN)"
-
-
-
-
