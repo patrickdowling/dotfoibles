@@ -20,9 +20,17 @@ else
     alias egrep="egrep --color=auto"
 fi
 
-alias ll="ls -alFh"
-alias la="ls -A"
-alias l="ls -CF"
+if [ "$ZOS" = "macos" ]; then
+    alias ll="eza -l --git"
+    alias la="eza -Al"
+    alias l="eza"
+    alias lld="eza -Dl"
+    alias llf="eza -fl"
+else
+    alias ll="ls -alFh"
+    alias la="ls -A"
+    alias l="ls -CF"
+fi
 
 alias -g ...='../..'
 alias -g ....='../../..'
