@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 #set -e
 
-function fatal() { echo "ERROR $@"; exit 1; }
+function fatal() { echo "ERROR $*"; exit 1; }
 function verbose() { [ "$VERBOSE" = "yes" ] && echo "$@"; }
 
 DRYRUN=no
 DATE=
-
+ARGS=()
 
 while [[ $# -gt 0 ]] ; do
 	case $1 in
@@ -34,8 +34,12 @@ while [[ $# -gt 0 ]] ; do
 			VERBOSE=yes
 			shift
 			;;
-		*)
+		-*)
 			fatal "Unknown option '$1'"
+			;;
+		*)
+			ARGS+=("$1")
+			shift
 			;;
 	esac
 done
@@ -47,8 +51,8 @@ if [ -z "$DATE" ] ; then
 	DATE="$(date +"%Y")"
 fi
 
-verbose "$PROJECT"
-verbose "// Copyright (C) $DATE $AUTHOR"
+verbose "PROJECT='$PROJECT'"
+verbose "COPYRIGHT='// Copyright (C) $DATE $AUTHOR'"
 
 SKIPPED=()
 IGNORED=()
@@ -67,39 +71,43 @@ function check_file() {
 	esac
 
 
-	if (cat "$filename" | head -n 10 | grep -Eq 'Copyright') ; then
+	if (head -n 10 "$filename" | grep -Eq 'Copyright') ; then
 		SKIPPED+=("$filename")
 		return
 	fi
 
 	if [ "$DRYRUN" = "no" ] ; then
 		local mod="$filename.tmp"
-		echo "// $PROJECT" > "$mod"
-		echo "//" >> "$mod"
-		echo "// Copyright (C) $DATE $AUTHOR" >> "$mod"
-		cat "$LICENSE" >> "$mod"
-		cat "$filename" >> "$mod"
+		{
+		echo "// $PROJECT"
+		echo "//"
+		echo "// Copyright (C) $DATE $AUTHOR"
+		cat "$LICENSE"
+		cat "$filename"
+		} > "$mod"
 		mv "$mod" "$filename"
 	fi
 	MODIFIED+=("$filename")
 }
 
-readarray -t files < <(git ls-files $@)
+readarray -t files < <(git ls-files "${ARGS[@]}")
 
-for f in ${files[*]}; do
+for f in "${files[@]}"; do
 	check_file "$f"
 done
 
-for f in ${SKIPPED[*]}; do
+for f in "${SKIPPED[@]}"; do
 	echo "SKIPPED $f"
 done
 
-for f in ${IGNORED[*]}; do
+for f in "${IGNORED[@]}"; do
 	echo "IGNORED $f"
 done
 
-for f in ${MODIFIED[*]}; do
+for f in "${MODIFIED[@]}"; do
 	echo "MODIFIED $f"
 done
 
-echo "${#SKIPPED[@]} skipped, ${#IGNORED[@]} ignored, ${#MODIFIED[@]} modified (dryrun=$DRYRUN)"
+echo "${#files[@]} files, ${#SKIPPED[@]} skipped, ${#IGNORED[@]} ignored, ${#MODIFIED[@]} modified (dryrun=$DRYRUN)"
+
+# vim: set ts=4 sw=4 tw=0 noet :
