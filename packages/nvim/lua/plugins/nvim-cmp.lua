@@ -56,6 +56,10 @@ function M.config()
         }
     end
 
+    local snippets_folder = vim.fn.stdpath "config" .. "/lua/snippets/"
+    require("luasnip.loaders.from_snipmate").lazy_load({paths = snippets_folder})
+    require("luasnip.loaders.from_lua").load({paths = snippets_folder})
+
     cmp.setup {
         snippet = {
             expand = function(args)

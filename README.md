@@ -72,8 +72,8 @@ My main projects directory has ended up as `~/dev`. Perhaps not the best choice 
 - ~~Lua style/formatting~~ -> should be convered with `neodev`
 - ~~Completions~~ -> preliminary config seems to work
 - clang-format, clang-tidy templates (possible duplicate from above)
-- Basic `.vimrc` as fallback
-- Snippets. `luasnip` is currently configured as a plugin, but we're not sourcing anything yet (...and it's never been part of my workflow).
+- Basic `.vimrc` as fallback?
+- Snippets. `luasnip` is currently configured as a plugin and works, but not many snippets (yet?).
 
 ### General/Install
 - Fonts & things?
