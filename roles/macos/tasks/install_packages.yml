@@ -1,8 +1,8 @@
 ---
 - name: "Brew:taps"
   homebrew_tap:
-    tap: "{{ item | default(item) }}"
-    url: "{{ item | default(omit) }}"
+    tap: "{{ item.name | default(item) }}"
+    url: "{{ item.url | default(omit) }}"
     state: present
   loop: "{{ homebrew_taps }}"
 

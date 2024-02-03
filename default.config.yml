@@ -35,8 +35,8 @@ homebrew_cask_packages:
   - iterm2
 
 homebrew_taps:
-  - homebrew/core
-  - homebrew/cask
+  - name: homebrew/cask-fonts
+    url: https://github.com/Homebrew/homebrew-cask-fonts.git
 
 ###
 ## Other packages

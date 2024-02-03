@@ -7,18 +7,17 @@ log "Detected OS: $DOT_OS"
 
 log_exec() {
     log "$@"
-    $@
+    "$@"
 }
 
 install_brew() {
-    brew="$(command -v brew)"
 	log "Checking for brew..."
-	if [ -z "$brew" ] ; then
+	if command -v brew ; then
+		log "Brew found: $(command -v brew)"
+	else
 		log "Installing brew..."
 		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 		#eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    else
-        log "Brew found: $brew"
     fi
 }
 

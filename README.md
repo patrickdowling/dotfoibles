@@ -21,6 +21,8 @@ git clone git@github.com:patrickdowling/dotfoibles.git .dotfiles
 cd .dotfiles
 ./system/bootstrap.sh
 ```
+This is the theory at least. There's some kinks to work out in this process because the brew install isn't active until later.
+
 (optional: setup `user.config.yml`)
 ```
 ansible-playbook main.yml -K
