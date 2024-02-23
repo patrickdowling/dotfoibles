@@ -1,5 +1,26 @@
+# main
 snippet main
 	int main(int argc, char *argv[])
 	{
 		${0}
 	}
+
+# #include <.h>
+snippet cinc
+	#include <${1}.h>
+
+# #include ".h"
+snippet inc
+	#include "${1}.h"
+
+# cpp-be-gone
+snippet cppguard
+	#ifdef __cplusplus
+	extern "C" {
+	#endif
+
+	${0}
+
+	#ifdef __cplusplus
+	} /* extern "C" */
+	#endif
