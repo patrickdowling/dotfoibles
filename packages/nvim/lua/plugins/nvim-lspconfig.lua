@@ -4,14 +4,11 @@ local M = {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         { 'j-hui/fidget.nvim', opts = {}, tag='legacy' },
-        'folke/neodev.nvim',
     },
     event = 'BufReadPre'
 }
 
 function M.config()
-    local neodev = require('neodev')
-    neodev.setup({})
 
     local mason = require('mason')
     mason.setup()
