@@ -12,7 +12,7 @@ function M.config()
 
     treesitter.setup {
         -- or "all", or "maintained"
-        ensure_installed = { "bash", "c", "cpp", "dockerfile", "help", "lua", "python", "vim" },
+        ensure_installed = { "bash", "c", "cpp", "dockerfile",  "lua", "python", "vim" },
         highlight = { enable = true },
         incremental_selection = {
             enable = true,
