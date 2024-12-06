@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+
+# Quick tool to strip the comment or license block in a C or C++ file and replace it with something else.
+# Not super smart.
+#
+# Should match
+# // comment
+# /* comment */
+# /* comment
+# block
+# */
+
+import argparse
+import datetime
+from enum import Enum
+import re
+import sys
+from string import Template
+
+match_cxx = re.compile(r'^//')
+match_c = re.compile(r'^/\*.*\*/')
+match_block_start = re.compile(r'^/\*')
+match_block_end = re.compile(r'.*\*/')
+
+class ScanState(Enum):
+    SKIP_HEADER = 0
+    SKIP_LINES = 1
+    COPY = 2
+
+def write_header(f, header):
+    f.write(header)
+
+if "__main__" == __name__:
+
+    parser = argparse.ArgumentParser("C/C++ copyright header tool")
+    parser.add_argument('-t', '--template', required=True, help="template file to insert at start of file")
+    parser.add_argument('-i', '--input', default=None, help="input file to process (default to stdin)")
+    parser.add_argument('-o', '--output', default=None, help="output file (stdout if input is stdin, else overwrite input file")
+
+    args = parser.parse_args()
+    with open(args.input, "r") if args.input else sys.stdin as input_file:
+        src = input_file.read()
+
+    if args.output:
+        output_file = open(args.output, "w")
+    else:
+        if args.input:
+            output_file = open(args.input, "w")
+        else:
+            output_file = sys.stdout
+
+    # Format templated header
+    with open(args.template) as t:
+        template = Template(t.read())
+
+    today = datetime.date.today()
+    kv = {
+        "year": today.year
+        }
+    header = template.safe_substitute(kv)
+
+    state = ScanState.SKIP_HEADER
+    block_comment = False
+
+    for line in src.splitlines(True):
+        l = line.strip()
+        if ScanState.SKIP_HEADER == state:
+            if block_comment:
+                if match_block_end.match(l):
+                    write_header(output_file, header)
+                    state = ScanState.SKIP_LINES
+                continue
+            elif len(l) < 1:
+                continue
+            elif match_cxx.match(l):
+                continue
+            elif match_c.match(l):
+                continue
+            elif match_block_start.match(l):
+                block_comment = True
+                continue
+            else:
+                write_header(output_file, header)
+                state = ScanState.SKIP_LINES
+
+        if ScanState.SKIP_LINES == state:
+            if len(l):
+                state = ScanState.COPY
+            else:
+                continue
+
+        if ScanState.COPY == state:
+            output_file.write(line)
