@@ -33,13 +33,18 @@ def write_header(f, header):
 if "__main__" == __name__:
 
     parser = argparse.ArgumentParser("C/C++ copyright header tool")
-    parser.add_argument('-t', '--template', required=True, help="template file to insert at start of file")
+    parser.add_argument('-e', '--exclude', default=None, help="if regex match found in file, don't modify")
     parser.add_argument('-i', '--input', default=None, help="input file to process (default to stdin)")
     parser.add_argument('-o', '--output', default=None, help="output file (stdout if input is stdin, else overwrite input file")
+    parser.add_argument('-t', '--template', required=True, help="template file to insert at start of file")
 
     args = parser.parse_args()
     with open(args.input, "r") if args.input else sys.stdin as input_file:
         src = input_file.read()
+
+    if args.exclude:
+        if re.findall(args.exclude, src, re.M):
+            exit(0)
 
     if args.output:
         output_file = open(args.output, "w")
